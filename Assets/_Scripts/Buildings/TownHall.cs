@@ -29,8 +29,8 @@ namespace _Scripts.Buildings
             }
             unit.ClearResources();
         }
-        
-        public void DepositResource(EResource type, int amount)
+
+        private void DepositResource(EResource type, int amount)
         {
             _resources.TryGetValue(type, out var quantity);
             _resources[type] = quantity + amount;
