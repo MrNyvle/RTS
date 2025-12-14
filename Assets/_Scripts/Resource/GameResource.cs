@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using _Scripts.Unit;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Resource
 {
@@ -11,12 +14,35 @@ namespace _Scripts.Resource
         [Tooltip("Use this for the amount that will be given to the villager")]
         public int amount;
         public float harvestTime = 2f;
-        
         public bool _isValid = true;
+        public GameObject pickupPoint;
+        
         float _timer;
+
+        private void Awake()
+        {
+            AutoSetupColliders();
+        }
+
+        private void AutoSetupColliders()
+        {
+            var colliders = GetComponentsInChildren<Collider>(true);
+
+            foreach (Collider col in colliders)
+            {
+                if (!col.TryGetComponent(out ResourceCollider resourceCollider))
+                {
+                    resourceCollider = col.gameObject.AddComponent<ResourceCollider>();
+                }
+
+                resourceCollider.Resource = this;
+            }
+        }
 
         public Vector3 GetPosition()
         {
+            if (pickupPoint != null)
+                return pickupPoint.transform.position;
             return transform.position;
         }
 
@@ -27,7 +53,7 @@ namespace _Scripts.Resource
 
         public bool TickTaking(float deltaTime)
         {
-            if (!_isValid) return false;
+            if (!_isValid) return true;
             
             _timer -= deltaTime;
             
@@ -36,6 +62,7 @@ namespace _Scripts.Resource
 
         public void FinishTaking(VillageUnit unit)
         {
+            if (!_isValid) return;
             unit.AddResource(eResource, amount);
             if (eResourceType == EResourceType.Unique)
             {

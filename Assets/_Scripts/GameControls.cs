@@ -37,6 +37,7 @@ namespace _Scripts
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 hit.collider.TryGetComponent(out GameResource resource);
+                hit.collider.TryGetComponent(out ResourceCollider resourceUnlimitedCollider);
                 hit.collider.TryGetComponent(out TownHall townHall);
                 
                 if (resource != null && GameManager.Instance.SelectedUnit != null)
@@ -47,9 +48,17 @@ namespace _Scripts
                 {
                     GameManager.Instance.SelectedUnit.IssueCommand(new DepositCommand());
                 }
+                else if (resourceUnlimitedCollider != null && GameManager.Instance.SelectedUnit != null)
+                {
+                    GameManager.Instance.SelectedUnit.IssueCommand(new GatherResourceCommand(resourceUnlimitedCollider.Resource));
+                }
                 else if (hit.collider.CompareTag("Ground"))
                 {
                     GameManager.Instance.SelectedUnit.IssueCommand(new MoveCommand(hit.point));
+                }
+                else
+                {
+                    Debug.Log(hit.collider.name);
                 }
                 
             }
