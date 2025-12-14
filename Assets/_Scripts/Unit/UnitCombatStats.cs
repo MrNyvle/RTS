@@ -7,12 +7,12 @@ namespace _Scripts.Unit
         private int healthPoints;
         private int rangePoints;
 
-        public UnitCombatStats(CombatType combatType, int warriorPoints)
+        public UnitCombatStats(ECombatType eCombatType, int warriorPoints)
         {
-            attackPoints = GameManager.Instance.GetCombatStats(combatType).attackPoints *  warriorPoints/10;
-            attackSpeedPoints = GameManager.Instance.GetCombatStats(combatType).attackSpeedPoints *  warriorPoints/10;
-            healthPoints = GameManager.Instance.GetCombatStats(combatType).healthPoints *  warriorPoints/10;
-            rangePoints = GameManager.Instance.GetCombatStats(combatType).rangePoints *  warriorPoints/10;
+            attackPoints = GameManager.Instance.GetCombatStats(eCombatType).attackPoints *  warriorPoints/10;
+            attackSpeedPoints = GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints *  warriorPoints/10;
+            healthPoints = GameManager.Instance.GetCombatStats(eCombatType).healthPoints *  warriorPoints/10;
+            rangePoints = GameManager.Instance.GetCombatStats(eCombatType).rangePoints *  warriorPoints/10;
         }
     }
 }

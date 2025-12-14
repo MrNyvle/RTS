@@ -12,32 +12,32 @@ namespace _Scripts.Unit
         private int minerPoints = 0;
         
         
-        Dictionary<JobType, int> timeWorkedAtJob = new ();
+        Dictionary<EJobType, int> timeWorkedAtJob = new ();
         
-        CombatType combatType;
+        ECombatType _eCombatType;
         
         public UnitCombatStats GetCombatStats()
         {
-            return new UnitCombatStats(combatType, warriorPoints);
+            return new UnitCombatStats(_eCombatType, warriorPoints);
         }
 
-        public void LevelUpJob(JobType jobType)
+        public void LevelUpJob(EJobType eJobType)
         {
-            switch (jobType)
+            switch (eJobType)
             {
-                case JobType.Warrior:
+                case EJobType.Warrior:
                     warriorPoints += 1;
                     break;
-                case JobType.Priest:
+                case EJobType.Priest:
                     preistPoints += 1;
                     break;
-                case JobType.Lumberjack:
+                case EJobType.Lumberjack:
                     lumberjackPoints += 1;
                     break;
-                case JobType.Miner:
+                case EJobType.Miner:
                     minerPoints += 1;
                     break;
-                case JobType.Worker:
+                case EJobType.Worker:
                     workerPoints += 1;
                     break;
             }

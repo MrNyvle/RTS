@@ -4,18 +4,17 @@ namespace _Scripts.Unit
 {
     public class UnitResource
     {
-        private Dictionary<Resource, int> resourcesTransported;
-
-        public void AddResourceToInv(Resource resource, int quantity)
-        {
-            resourcesTransported.Add(resource, quantity);
-        }
+        public Dictionary<EResource, int> resourcesTransported =  new Dictionary<EResource, int>();
         
-        public (Resource, int) RemoveResourceFromInv(Resource resource)
+        public void AddResourceToInv(EResource eResource, int quantity)
         {
-            int quantity = resourcesTransported[resource];
-            resourcesTransported.Remove(resource);
-            return (resource, quantity);
+            resourcesTransported.TryGetValue(eResource, out int count);
+            resourcesTransported[eResource] = count + quantity;
+        }
+
+        public void Clear()
+        {
+            resourcesTransported.Clear();
         }
     }
 }

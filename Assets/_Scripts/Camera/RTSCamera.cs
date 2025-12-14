@@ -11,6 +11,7 @@ public class RTSCamera : MonoBehaviour
     private InputAction zoomAction;
     private InputAction rotateAction;
     private InputAction rotateButtonAction;
+    private InputAction centerCam;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 25f;
@@ -38,6 +39,7 @@ public class RTSCamera : MonoBehaviour
         zoomAction = map.FindAction("Zoom");
         rotateAction = map.FindAction("Rotate");
         rotateButtonAction = map.FindAction("RotateButton");
+        centerCam = map.FindAction("CenterCam");
     }
     private void OnEnable()
     {
@@ -45,6 +47,7 @@ public class RTSCamera : MonoBehaviour
         zoomAction.Enable();
         rotateAction.Enable();
         rotateButtonAction.Enable();
+        centerCam.Enable();
     }
 
     private void Start()
@@ -58,6 +61,7 @@ public class RTSCamera : MonoBehaviour
         zoomAction.Disable();
         rotateAction.Disable();
         rotateButtonAction.Disable();
+        centerCam.Disable();
     }
 
     void Update()
@@ -65,6 +69,7 @@ public class RTSCamera : MonoBehaviour
         HandleMovement();
         HandleZoom();
         HandleRotation();
+        HandleCamCentering();
     }
 
     void LateUpdate()
@@ -72,45 +77,55 @@ public class RTSCamera : MonoBehaviour
         LockToGround();
     }
 
-    // ---------------- MOVEMENT ----------------
+    private void HandleCamCentering()
+    {
+        if (!centerCam.IsPressed())
+            return;
+
+        transform.position = Vector3.zero;
+    }
+    
     void HandleMovement()
     {
         Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
+        
+        Vector3 forward = transform.forward;
+        forward.y = 0;               // keep movement flat
+        forward.Normalize();
 
-        // Edge scrolling
+        Vector3 right = transform.right;
+        right.y = 0;
+        right.Normalize();
+
+        Vector3 move = (right * input.x + forward * input.y);
+        
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
-        if (mousePos.x < edgeSize)
-            move.x -= 1;
-        if (mousePos.x > Screen.width - edgeSize)
-            move.x += 1;
-        if (mousePos.y < edgeSize)
-            move.z -= 1;
-        if (mousePos.y > Screen.height - edgeSize)
-            move.z += 1;
+        if (mousePos.x < edgeSize) move -= right;
+        if (mousePos.x > Screen.width - edgeSize) move += right;
+        if (mousePos.y < edgeSize) move -= forward;
+        if (mousePos.y > Screen.height - edgeSize) move += forward;
 
         transform.position += move.normalized * (moveSpeed * Time.deltaTime);
     }
-
-    // ---------------- ZOOM ----------------
+    
     void HandleZoom()
     {
         float scroll = zoomAction.ReadValue<float>();
-        Vector3 camPos = mainCam.transform.localPosition;
+        if (Mathf.Abs(scroll) < 0.01f)
+            return;
         
-        if (Mathf.Abs(scroll) > 0.01f)
-        {
-            camPos += mainCam.transform.forward * (scroll * zoomSpeed);
-
-            if (camPos.y < minZoom || camPos.y > maxZoom)
-                return;
-            
-            mainCam.transform.localPosition = camPos;
-        }
+        Vector3 offset = mainCam.transform.position - transform.position;
+        
+        offset += mainCam.transform.forward * (scroll * zoomSpeed);
+        
+        float distance = Mathf.Clamp(offset.magnitude, minZoom, maxZoom);
+        
+        offset = offset.normalized * distance;
+        
+        mainCam.transform.position = transform.position + offset;
     }
-
-    // ---------------- ROTATION ----------------
+    
     void HandleRotation()
     {
         if (!rotateButtonAction.IsPressed())
@@ -119,8 +134,7 @@ public class RTSCamera : MonoBehaviour
         float rotInput = rotateAction.ReadValue<float>();
         transform.Rotate(Vector3.up, rotInput * rotationSpeed * Time.deltaTime);
     }
-
-    // ---------------- GROUND LOCK ----------------
+    
     void LockToGround()
     {
         if (Physics.Raycast(transform.position + Vector3.up * 100f,
