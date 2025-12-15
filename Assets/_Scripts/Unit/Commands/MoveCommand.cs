@@ -21,7 +21,7 @@ namespace _Scripts.Unit.Commands
             _movePosition = movePosition;
             _finished = false;
         }
-        
+
         public void Start(VillageUnit unit)
         {
             unit.Movement.MoveTo(_movePosition);

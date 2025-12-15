@@ -13,9 +13,9 @@ namespace _Scripts.Unit.Commands
 
         private State _state;
         bool _finished;
-        
-        public bool IsFinished => _finished;
 
+        public bool IsFinished => _finished;
+        
         public DepositCommand()
         {
             _finished = false;
@@ -23,7 +23,7 @@ namespace _Scripts.Unit.Commands
 
         public void Start(VillageUnit unit)
         {
-           unit.Movement.MoveTo(unit.townHall.GetEntrancePosition());
+            unit.Movement.MoveTo(unit.townHall.GetEntrancePosition());
         }
 
         public void Tick(VillageUnit unit)

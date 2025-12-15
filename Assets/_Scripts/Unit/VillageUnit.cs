@@ -44,7 +44,14 @@ namespace _Scripts.Unit
 
             if (_currentCommand != null && _currentCommand.IsFinished)
             {
-                _currentCommand = null;
+                if (_currentCommand is IUnitCommandRepeatable repeatableCommand)
+                {
+                    repeatableCommand.Repeat(this);
+                }
+                else
+                {
+                    _currentCommand = null;
+                }
             }
         }
 
