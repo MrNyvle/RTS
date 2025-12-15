@@ -20,15 +20,18 @@ namespace _Scripts.Unit.Commands
         bool _finished;
     
         public bool IsFinished => _finished;
+        public EJobType JobType { get; set; }
 
         public GatherResourceCommand(GameResource resource)
         {
+            JobType = EJobType.Lumberjack;
             _resource = resource;
             _finished = false;
         }
     
         public void Start(VillageUnit unit)
         {
+            unit.unitVillagerJob.StartJob(JobType);
             unit.Movement.MoveTo(_resource.GetPosition());
             _state = State.MovingToResource;
         }
@@ -65,6 +68,7 @@ namespace _Scripts.Unit.Commands
     
                 case State.Depositing:
                     unit.townHall.Deposit(unit);
+                    unit.unitVillagerJob.EndJob();
                     _finished = true;
                     break;
             }

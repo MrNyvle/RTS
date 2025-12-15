@@ -5,43 +5,34 @@ namespace _Scripts.Unit
 {
     public class UnitVillagerStats
     {
-        private int warriorPoints = 0;
-        private int preistPoints = 0;
-        private int workerPoints = 0;
-        private int lumberjackPoints = 0;
-        private int minerPoints = 0;
+        public Dictionary<EJobType, int> jobsPoint = new Dictionary<EJobType, int>();
         
-        
-        Dictionary<EJobType, int> timeWorkedAtJob = new ();
-        
-        ECombatType _eCombatType;
+        ECombatArchetype _eCombatType;
         
         public UnitCombatStats GetCombatStats()
         {
-            return new UnitCombatStats(_eCombatType, warriorPoints);
+            return new UnitCombatStats(_eCombatType, GetJobPoints(EJobType.Warrior));
         }
 
-        public void LevelUpJob(EJobType eJobType)
+        public int GetJobPoints(EJobType jobType)
         {
-            switch (eJobType)
-            {
-                case EJobType.Warrior:
-                    warriorPoints += 1;
-                    break;
-                case EJobType.Priest:
-                    preistPoints += 1;
-                    break;
-                case EJobType.Lumberjack:
-                    lumberjackPoints += 1;
-                    break;
-                case EJobType.Miner:
-                    minerPoints += 1;
-                    break;
-                case EJobType.Worker:
-                    workerPoints += 1;
-                    break;
-            }
+            return jobsPoint.GetValueOrDefault(jobType);
         }
-        
+
+        public void UpdateJobPoints(EJobType jobType, int points)
+        {
+            jobsPoint[jobType] = points;
+        }
+
+        public int GetTotalPoints()
+        {
+            int points = 0;
+            foreach (var kv in jobsPoint)
+            {
+                points += kv.Value;
+            }
+            
+            return points;
+        }
     }
 }

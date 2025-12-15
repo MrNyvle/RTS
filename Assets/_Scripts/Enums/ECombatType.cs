@@ -1,10 +1,11 @@
 namespace _Scripts.Unit
 {
-    public enum ECombatType
+    public enum ECombatArchetype
     {
         Assassin,
         Swordsman,
         HeavyArmor,
+        Basic,
         Peasant,
     }
 }

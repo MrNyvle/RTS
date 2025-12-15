@@ -7,7 +7,7 @@ namespace _Scripts.Unit
         private int healthPoints;
         private int rangePoints;
 
-        public UnitCombatStats(ECombatType eCombatType, int warriorPoints)
+        public UnitCombatStats(ECombatArchetype eCombatType, int warriorPoints)
         {
             attackPoints = GameManager.Instance.GetCombatStats(eCombatType).attackPoints *  warriorPoints/10;
             attackSpeedPoints = GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints *  warriorPoints/10;

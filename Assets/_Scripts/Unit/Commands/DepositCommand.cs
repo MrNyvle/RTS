@@ -15,14 +15,18 @@ namespace _Scripts.Unit.Commands
         bool _finished;
 
         public bool IsFinished => _finished;
-        
+        public EJobType JobType { get; set; }
+
         public DepositCommand()
         {
+            JobType = EJobType.Unemployed;
             _finished = false;
         }
 
         public void Start(VillageUnit unit)
         {
+            JobType = GameManager.Instance.resourceToJob[unit.unitResource.GetMostResource(out _)];
+            unit.unitVillagerJob.StartJob(JobType);
             unit.Movement.MoveTo(unit.townHall.GetEntrancePosition());
         }
 
@@ -43,6 +47,7 @@ namespace _Scripts.Unit.Commands
                 case State.Depositing:
                     Debug.Log("Depositing");
                     unit.townHall.Deposit(unit);
+                    unit.unitVillagerJob.EndJob();
                     _finished = true;
                     break;
             }

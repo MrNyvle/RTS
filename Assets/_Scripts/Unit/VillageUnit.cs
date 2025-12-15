@@ -1,6 +1,4 @@
-using System;
 using _Scripts.Buildings;
-using _Scripts.Resource;
 using _Scripts.UI.Villager;
 using _Scripts.Unit.Commands;
 using NaughtyAttributes;
@@ -14,7 +12,10 @@ namespace _Scripts.Unit
     {
         public UnitResource unitResource = new UnitResource();
         public TownHall townHall;
-        public VillagerUI villagerUI;
+        public VillagerUI villagerUI; 
+        public UnitVillagerJob unitVillagerJob;
+
+        public int lumberjackPoint;
         
         IUnitCommand _currentCommand;
         UnitMovement _unitMovement;
@@ -24,10 +25,10 @@ namespace _Scripts.Unit
         
         private void Awake()
         {
+            unitVillagerJob = new UnitVillagerJob(_unitVillagerStats);
             TryGetComponent(out _unitMovement);
         }
-
-        [Button]
+        
         private void Start()
         {
             villagerUI.UpdateUI(unitResource);
@@ -40,6 +41,7 @@ namespace _Scripts.Unit
 
         void Update()
         {
+            lumberjackPoint = _unitVillagerStats.GetJobPoints(EJobType.Lumberjack);
             _currentCommand?.Tick(this);
 
             if (_currentCommand != null && _currentCommand.IsFinished)

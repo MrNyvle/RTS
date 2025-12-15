@@ -7,7 +7,7 @@ namespace _Scripts.Unit
     {
         Wood,
         Stone,
-        Iron,
+        Food,
         Gold,
         Shiny
     }

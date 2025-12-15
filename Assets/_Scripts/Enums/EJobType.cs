@@ -6,6 +6,8 @@ namespace _Scripts.Unit
         Priest,
         Lumberjack,
         Miner,
-        Worker
+        Seller,
+        Unemployed,
+        Farmer
     }
 }

@@ -49,4 +49,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2cc46099e1646c590a384d39040efd7a, type: 2}
   - {fileID: 11400000, guid: a9e4ea20eed700d77ba1d2d4c6cebcdb, type: 2}
   - {fileID: 11400000, guid: 9af5ba9e797462521b019f31c22b8037, type: 2}
+  jobScalingBalancers: {fileID: 11400000, guid: dd2b374453d61a6cd90348bef378d8e9, type: 2}
   mainCamera: {fileID: 0}

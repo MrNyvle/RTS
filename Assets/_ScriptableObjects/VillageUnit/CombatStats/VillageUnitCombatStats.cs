@@ -7,7 +7,7 @@ namespace _ScriptableObjects.VillageUnit
     [CreateAssetMenu(fileName = "VillageUnitCombatStats", menuName = "Scriptable Objects/VillageUnitCombatStats")]
     public class VillageUnitCombatStats : ScriptableObject
     {
-        public ECombatType eCombatType;
+        public ECombatArchetype eCombatType;
         
         public int attackPoints;
         public int attackSpeedPoints;

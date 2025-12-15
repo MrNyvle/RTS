@@ -12,6 +12,20 @@ namespace _Scripts.Unit
             resourcesTransported[eResource] = count + quantity;
         }
 
+        public EResource GetMostResource(out int quantity)
+        {
+            KeyValuePair<EResource,int> rtrn = new KeyValuePair<EResource, int>();
+            foreach (var kv in resourcesTransported)
+            {
+                if (kv.Value > rtrn.Value)
+                {
+                    rtrn = kv;
+                }
+            }
+            quantity = rtrn.Value;
+            return rtrn.Key;
+        }
+        
         public void Clear()
         {
             resourcesTransported.Clear();

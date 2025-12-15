@@ -15,15 +15,18 @@ namespace _Scripts.Unit.Commands
         bool _finished;
         
         public bool IsFinished => _finished;
+        public EJobType JobType { get; set; }
 
         public MoveCommand(Vector3 movePosition)
         {
+            JobType = EJobType.Unemployed;
             _movePosition = movePosition;
             _finished = false;
         }
 
         public void Start(VillageUnit unit)
         {
+            unit.unitVillagerJob.StartJob(JobType);
             unit.Movement.MoveTo(_movePosition);
             _state = State.MovingToPosition;
         }
@@ -36,6 +39,7 @@ namespace _Scripts.Unit.Commands
                     if (unit.Movement.Reached())
                     {
                         _finished = true;
+                        unit.unitVillagerJob.EndJob();
                     }
                     break;
             }
