@@ -14,10 +14,8 @@ namespace _Scripts.Resource
         [Tooltip("Use this for the amount that will be given to the villager")]
         public int amount;
         public float harvestTime = 2f;
-        public bool _isValid = true;
+        public bool isValid = true;
         public GameObject pickupPoint;
-        
-        float _timer;
 
         private void Awake()
         {
@@ -46,33 +44,14 @@ namespace _Scripts.Resource
             return transform.position;
         }
 
-        public void StartTaking()
-        {
-            _timer = harvestTime;
-        }
-
-        public bool TickTaking(float deltaTime)
-        {
-            if (!_isValid) return true;
-            
-            _timer -= deltaTime;
-            
-            return _timer <= 0f;
-        }
-
         public void FinishTaking(VillageUnit unit)
         {
-            if (!_isValid) return;
+            if (!isValid) return;
             unit.AddResource(eResource, amount);
             if (eResourceType == EResourceType.Unique)
             {
-                _isValid = false;
+                isValid = false;
             }
-        }
-
-        public void CancelTaking()
-        {
-            _timer = 0f;
         }
     }
 }

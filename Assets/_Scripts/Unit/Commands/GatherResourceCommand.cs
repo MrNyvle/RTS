@@ -16,10 +16,11 @@ namespace _Scripts.Unit.Commands
     
         State _state;
         GameResource _resource;
+        float _timer;
         bool _finished;
     
         public bool IsFinished => _finished;
-        
+
         public GatherResourceCommand(GameResource resource)
         {
             _resource = resource;
@@ -42,7 +43,8 @@ namespace _Scripts.Unit.Commands
                     Debug.Log("Moving To Resource");
                     if (move.Reached())
                     {
-                        _resource.StartTaking();
+                        Debug.Log("Reached");
+                        StartTaking();
                         _state = State.Harvesting;
                     }
                     break;
@@ -50,7 +52,7 @@ namespace _Scripts.Unit.Commands
                 case State.Harvesting:
                     Debug.Log("Harvesting");
                     
-                    if (_resource.TickTaking(Time.deltaTime))
+                    if (TickTaking(Time.deltaTime))
                     {
                         _resource.FinishTaking(unit);
                         move.MoveTo(unit.townHall.GetEntrancePosition());
@@ -73,18 +75,41 @@ namespace _Scripts.Unit.Commands
                     break;
             }
         }
-    
+        
+        public void StartTaking()
+        {
+            _timer = _resource.harvestTime;
+        }
+
+        public bool TickTaking(float deltaTime)
+        {
+            if (!_resource.isValid) return true;
+            
+            _timer -= deltaTime;
+            
+            return _timer <= 0f;
+        }
+
         public void Cancel(VillageUnit unit)
         {
             unit.Movement.Stop();
-            _resource?.CancelTaking();
+            CancelTaking();
             _finished = true;
         }
-    
+
+        public void CancelTaking()
+        {
+            _timer = 0f;
+        }
+
         public void Repeat(VillageUnit unit)
         {
-            _finished =  false;
-            Start(unit);
+            if (_resource.eResourceType == EResourceType.Unlimited)
+            {
+                Debug.Log("Repeating");
+                _finished = false;
+                Start(unit);
+            }
         }
     }
 }
