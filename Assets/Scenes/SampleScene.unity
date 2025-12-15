@@ -2266,10 +2266,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1596195327871438149, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
-      propertyPath: depositTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2658616278587508409, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
       propertyPath: m_Name
       value: TownHall

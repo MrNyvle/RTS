@@ -157,5 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0721b393e148b6993f3b3d2cfad402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Buildings.TownHall
+  id: 0
   entrance: {fileID: 622980456061639897}
-  depositTime: 0
+  depositTime: 2
