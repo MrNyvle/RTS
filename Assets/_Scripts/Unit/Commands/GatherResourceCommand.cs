@@ -40,18 +40,14 @@ namespace _Scripts.Unit.Commands
             switch (_state)
             {
                 case State.MovingToResource:
-                    Debug.Log("Moving To Resource");
                     if (move.Reached())
                     {
-                        Debug.Log("Reached");
                         StartTaking();
                         _state = State.Harvesting;
                     }
                     break;
     
                 case State.Harvesting:
-                    Debug.Log("Harvesting");
-                    
                     if (TickTaking(Time.deltaTime))
                     {
                         _resource.FinishTaking(unit);
@@ -61,7 +57,6 @@ namespace _Scripts.Unit.Commands
                     break;
     
                 case State.MovingToTownHall:
-                    Debug.Log("Moving To Town Hall");
                     if (move.Reached())
                     {
                         _state = State.Depositing;
@@ -69,7 +64,6 @@ namespace _Scripts.Unit.Commands
                     break;
     
                 case State.Depositing:
-                    Debug.Log("Depositing");
                     unit.townHall.Deposit(unit);
                     _finished = true;
                     break;
@@ -106,7 +100,6 @@ namespace _Scripts.Unit.Commands
         {
             if (_resource.eResourceType == EResourceType.Unlimited)
             {
-                Debug.Log("Repeating");
                 _finished = false;
                 Start(unit);
             }
