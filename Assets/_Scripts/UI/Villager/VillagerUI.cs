@@ -24,7 +24,7 @@ namespace _Scripts.UI.Villager
         {
             foreach (var kvp in _resourcesItemsUI)
             {
-                if (resource.resourcesTransported.ContainsKey(kvp.Key))
+                if (resource.resourcesTransported.ContainsKey(kvp.Key) && resource.resourcesTransported[kvp.Key] != 0 )
                 {
                     kvp.Value.SetItemUI(kvp.Key, resource.resourcesTransported[kvp.Key]);
                     kvp.Value.gameObject.SetActive(true);

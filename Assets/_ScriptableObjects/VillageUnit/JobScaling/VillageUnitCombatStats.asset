@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_ScriptableObjects.VillageUnit.JobScaling.JobScalingBalancer
   jobsTime:
   - eJobType: 2
-    taskMinDuration: 1
+    taskMinDuration: 3600

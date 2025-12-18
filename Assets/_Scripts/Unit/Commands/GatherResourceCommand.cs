@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Buildings;
 using _Scripts.Resource;
 using UnityEngine;
 
@@ -10,12 +11,14 @@ namespace _Scripts.Unit.Commands
         {
             MovingToResource,
             Harvesting,
-            MovingToTownHall,
+            MovingToBuilding,
+            StartDepositing,
             Depositing
         }
     
         State _state;
         GameResource _resource;
+        Building _building;
         float _timer;
         bool _finished;
     
@@ -32,8 +35,9 @@ namespace _Scripts.Unit.Commands
         public void Start(VillageUnit unit)
         {
             unit.unitVillagerJob.StartJob(JobType);
-            unit.Movement.MoveTo(_resource.GetPosition());
             _state = State.MovingToResource;
+            unit.Movement.MoveTo(_resource.GetPosition());
+            _building = unit.townHall.GetBuildingForResource(_resource.eResource);
         }
     
         public void Tick(VillageUnit unit)
@@ -45,41 +49,54 @@ namespace _Scripts.Unit.Commands
                 case State.MovingToResource:
                     if (move.Reached())
                     {
-                        StartTaking();
+                        StartTimer(_resource.harvestTime);
                         _state = State.Harvesting;
                     }
                     break;
     
                 case State.Harvesting:
-                    if (TickTaking(Time.deltaTime))
+                    if (!_resource.isValid)
+                    {
+                        Cancel(unit);
+                        break;
+                    } 
+                    if (TickTimer(Time.deltaTime))
                     {
                         _resource.FinishTaking(unit);
-                        move.MoveTo(unit.townHall.GetEntrancePosition());
-                        _state = State.MovingToTownHall;
+                        move.MoveTo(_building.GetEntrancePosition());
+                        _state = State.MovingToBuilding;
                     }
                     break;
     
-                case State.MovingToTownHall:
+                case State.MovingToBuilding:
                     if (move.Reached())
+                    {
+                        StartTimer(_building.depositTime);
+                        _state = State.StartDepositing;
+                    }
+                    break;
+                
+                case State.StartDepositing:
+                    if (TickTimer(Time.deltaTime))
                     {
                         _state = State.Depositing;
                     }
                     break;
-    
+                
                 case State.Depositing:
-                    unit.townHall.Deposit(unit);
+                    unit.DepositResources(_building.buildingResource);
                     unit.unitVillagerJob.EndJob();
                     _finished = true;
                     break;
             }
         }
         
-        public void StartTaking()
+        public void StartTimer(float time)
         {
-            _timer = _resource.harvestTime;
+            _timer = time;
         }
 
-        public bool TickTaking(float deltaTime)
+        public bool TickTimer(float deltaTime)
         {
             if (!_resource.isValid) return true;
             
@@ -91,11 +108,11 @@ namespace _Scripts.Unit.Commands
         public void Cancel(VillageUnit unit)
         {
             unit.Movement.Stop();
-            CancelTaking();
+            CancelTimer();
             _finished = true;
         }
 
-        public void CancelTaking()
+        public void CancelTimer()
         {
             _timer = 0f;
         }

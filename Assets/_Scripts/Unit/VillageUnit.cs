@@ -69,13 +69,20 @@ namespace _Scripts.Unit
             _currentCommand?.Cancel(this);
             _currentCommand = null;
         }
-
+        
         public void AddResource(EResource eResource, int quantity)
         {
             unitResource.AddResourceToInv(eResource, quantity);
             villagerUI.UpdateUI(unitResource);
         }
 
+        public void DepositResources(BuildingResource resource)
+        {
+            unitResource.DepositResourceToBuilding(resource);
+            villagerUI.UpdateUI(unitResource);
+            townHall.UpdateUI();
+        }
+        
         public void ClearResources()
         {
             unitResource.Clear();

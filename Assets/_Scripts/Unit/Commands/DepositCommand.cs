@@ -8,17 +8,21 @@ namespace _Scripts.Unit.Commands
         enum State
         {
             MovingToTownHall,
+            StartDepositing,
             Depositing,
         }
 
+        private Building _building;
         private State _state;
         bool _finished;
+        float _timer;
 
         public bool IsFinished => _finished;
         public EJobType JobType { get; set; }
 
-        public DepositCommand()
+        public DepositCommand(Building building)
         {
+            _building = building;
             JobType = EJobType.Unemployed;
             _finished = false;
         }
@@ -40,19 +44,39 @@ namespace _Scripts.Unit.Commands
                     Debug.Log("Moving To Town Hall");
                     if (move.Reached())
                     {
+                        StartTimer(_building.depositTime);
                         _state = State.Depositing;
                     }
                     break;
 
+                case State.StartDepositing:
+                    if (TickTimer(Time.deltaTime))
+                    {
+                        _state = State.Depositing;
+                    }
+                    break;
+                
                 case State.Depositing:
                     Debug.Log("Depositing");
-                    unit.townHall.Deposit(unit);
+                    unit.DepositResources(_building.buildingResource);
                     unit.unitVillagerJob.EndJob();
                     _finished = true;
                     break;
             }
         }
 
+        public void StartTimer(float time)
+        {
+            _timer = time;
+        }
+
+        public bool TickTimer(float deltaTime)
+        {
+            _timer -= deltaTime;
+            
+            return _timer <= 0f;
+        }
+        
         public void Cancel(VillageUnit unit)
         {
             unit.Movement.Stop();

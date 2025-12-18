@@ -14,7 +14,7 @@ namespace _Scripts.UI
 
 	    public void UpdateResourceBar(TownHall townHall)
 	    {
-		    foreach (var kvp in townHall._resources)
+		    foreach (var kvp in townHall.GetVillageResources())
 		    {
 			    ResourceItem resourceItem = _resourceBars[townHall.id].GetResourceUI(kvp.Key);
 			    resourceItem.SetItemUI(kvp.Key, kvp.Value);

@@ -38,15 +38,15 @@ namespace _Scripts
             {
                 hit.collider.TryGetComponent(out GameResource resource);
                 hit.collider.TryGetComponent(out ResourceCollider resourceUnlimitedCollider);
-                hit.collider.TryGetComponent(out TownHall townHall);
+                hit.collider.TryGetComponent(out Building building);
                 
                 if (resource != null && GameManager.Instance.SelectedUnit != null)
                 {
                     GameManager.Instance.SelectedUnit.IssueCommand(new GatherResourceCommand(resource));
                 }
-                else if(townHall !=null && GameManager.Instance.SelectedUnit.townHall == townHall)
+                else if(building !=null)
                 {
-                    GameManager.Instance.SelectedUnit.IssueCommand(new DepositCommand());
+                    GameManager.Instance.SelectedUnit.IssueCommand(new DepositCommand(building));
                 }
                 else if (resourceUnlimitedCollider != null && GameManager.Instance.SelectedUnit != null)
                 {
