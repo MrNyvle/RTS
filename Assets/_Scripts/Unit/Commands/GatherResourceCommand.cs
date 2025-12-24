@@ -1,4 +1,3 @@
-using System;
 using _Scripts.Buildings;
 using _Scripts.Resource;
 using UnityEngine;
@@ -7,7 +6,7 @@ namespace _Scripts.Unit.Commands
 {
     public class GatherResourceCommand : IUnitCommandRepeatable
     {
-         enum State
+        enum State
         {
             MovingToResource,
             Harvesting,
@@ -37,7 +36,7 @@ namespace _Scripts.Unit.Commands
             unit.unitVillagerJob.StartJob(JobType);
             _state = State.MovingToResource;
             unit.Movement.MoveTo(_resource.GetPosition());
-            _building = unit.townHall.GetBuildingForResource(_resource.eResource);
+            _building = unit.TownHall.GetBuildingForResource(_resource.eResource);
         }
     
         public void Tick(VillageUnit unit)

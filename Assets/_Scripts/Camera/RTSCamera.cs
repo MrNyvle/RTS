@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class RTSCamera : MonoBehaviour
 {
+    public bool handleMovement = true;
+    
     [Header("Input")]
     [SerializeField] private InputActionAsset inputActions;
     private InputAction moveAction;
@@ -66,7 +68,8 @@ public class RTSCamera : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
+        if (handleMovement)
+            HandleMovement();
         HandleZoom();
         HandleRotation();
         HandleCamCentering();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using _Scripts.UI;
 using _Scripts.Unit;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,6 +24,10 @@ namespace _Scripts.Buildings
 
         public List<EBuildingBuilding> buildingList =  new List<EBuildingBuilding>();
         
+        public List<VillageUnit> villageUnits = new List<VillageUnit>();
+
+        public VillageUnit villageUnitPrefab;
+        
         private void Awake()
         {
             foreach (var eBuildingBuilding in buildingList)
@@ -31,6 +36,26 @@ namespace _Scripts.Buildings
             }
         }
 
+        [Button]
+        public void SpawnVillageUnit()
+        {
+            VillageUnit villageUnit = Instantiate(villageUnitPrefab, GetEntrancePosition(), Quaternion.identity);
+            villageUnit.AssignTownHall(this);
+            villageUnits.Add(villageUnit);
+        }
+
+        public float AvgTownCombatLevel()
+        {
+            float sum = 0;
+            foreach (VillageUnit villageUnit in villageUnits)
+            {
+                sum += villageUnit.unitStats.jobsPoint[EJobType.Warrior];
+            }
+            float avg = sum / villageUnits.Count;
+
+            return avg;
+        }
+        
         public void AssignBuildings(Building building)
         {
             Dictionary<EBuilding, Building> buildings = new();
@@ -50,22 +75,6 @@ namespace _Scripts.Buildings
             
             return villageResources;
         }
-
-        public bool GetBuilding<T>(out T building) where T : Building
-        {
-            List<Building> buildingList =  buildings.Values.ToList();
-
-            foreach (Building b in buildingList)
-            {
-                if (b.GetType() == typeof(T))
-                {
-                    building = b as T;
-                    return true;
-                }
-            }
-            building = null;
-            return false;
-        }
         
         public Building GetBuildingForResource(EResource resource)
         {
@@ -78,14 +87,7 @@ namespace _Scripts.Buildings
             }
             return null;
         }
-
         
-        public EBuilding GetBuildingType(EResource resource)
-        {
-            GameManager.Instance.resourceToBuilding.TryGetValue(resource, out var building);
-            return building;
-        }
-
         public void UpdateUI()
         {
             UiManager.Instance.UpdateResourceBar(this);

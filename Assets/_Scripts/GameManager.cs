@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _ScriptableObjects.VillageUnit;
 using _ScriptableObjects.VillageUnit.JobScaling;
 using _Scripts.Buildings;
+using _Scripts.Enemies;
 using _Scripts.Unit;
 using UnityEngine;
 
@@ -63,6 +64,8 @@ namespace _Scripts
             {EJobType.Seller, EBuilding.CashStash},
             { EJobType.Priest, EBuilding.ShineShrine}
         };
+
+        public List<Enemy> Enemies = new List<Enemy>();
         
         public Camera mainCamera;
         

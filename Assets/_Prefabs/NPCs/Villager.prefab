@@ -1098,6 +1098,8 @@ GameObject:
   - component: {fileID: 7997771451786022600}
   - component: {fileID: 2042611331111172227}
   - component: {fileID: 8447300691527718488}
+  - component: {fileID: 8468092620092489275}
+  - component: {fileID: 3051301275393870819}
   m_Layer: 0
   m_Name: Villager
   m_TagString: VillageUnit
@@ -1233,8 +1235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a552fe25730b40ac84008c9c406770fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Unit.VillageUnit
-  townHall: {fileID: 0}
   villagerUI: {fileID: 496148208189934085}
+  lumberjackPoint: 0
 --- !u!114 &8447300691527718488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,6 +1249,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f174c6a63bd846559e65370afcf9910a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Unit.UnitMovement
+--- !u!114 &8468092620092489275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4077335878607882319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f684029d53354aaabc30b8c9135f3832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Unit.Commands.Vision
+  viewRadius: 10
+  viewAngle: 90
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  visibleTargets: []
+--- !u!114 &3051301275393870819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4077335878607882319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5127e8bc2e3d40bd852b6754b6372bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Unit.Health
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4762654495195927233
 GameObject:
   m_ObjectHideFlags: 0

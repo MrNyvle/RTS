@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3605539551605480435}
   - component: {fileID: 4041040430371884101}
   - component: {fileID: 1596195327871438149}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TownHall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,6 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0721b393e148b6993f3b3d2cfad402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Buildings.TownHall
-  id: 0
+  buildingResource:
+    acceptedResources: 
   entrance: {fileID: 622980456061639897}
   depositTime: 2
+  id: 0
+  buildingList: []

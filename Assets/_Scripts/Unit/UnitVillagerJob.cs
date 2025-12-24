@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +7,13 @@ namespace _Scripts.Unit
     public class UnitVillagerJob
     {
         EJobType _currentJob;
-        UnitVillagerStats _stats;
+        UnitStats _stats;
 
         Dictionary<EJobType, float> _jobsTime = new ();
         
         private float _startJobTime;
 
-        public UnitVillagerJob(UnitVillagerStats stats)
+        public UnitVillagerJob(UnitStats stats)
         {
             _stats = stats;
         }

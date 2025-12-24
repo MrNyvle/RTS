@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaughtyAttributes.Test", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaughtyAttributes.Core", "NaughtyAttributes.Core.csproj", "{cd9f5ecf-4078-f3d5-7ce3-50858f443b30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaughtyAttributes.Editor", "NaughtyAttributes.Editor.csproj", "{60d537ac-ad57-a41d-7b2c-3042bced478b}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{aecb73d9-5caf-c867-9ec3-328fb0f61f9b}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaughtyAttributes.Editor", "NaughtyAttributes.Editor.csproj", "{60d537ac-ad57-a41d-7b2c-3042bced478b}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{2708e264-d83e-30a3-5f87-db09f235d4ef}"
 EndProject
@@ -20,10 +20,10 @@ Global
 		{699c159d-7bc5-c543-9a10-d328433df26b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{cd9f5ecf-4078-f3d5-7ce3-50858f443b30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{cd9f5ecf-4078-f3d5-7ce3-50858f443b30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60d537ac-ad57-a41d-7b2c-3042bced478b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60d537ac-ad57-a41d-7b2c-3042bced478b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{aecb73d9-5caf-c867-9ec3-328fb0f61f9b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{aecb73d9-5caf-c867-9ec3-328fb0f61f9b}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60d537ac-ad57-a41d-7b2c-3042bced478b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60d537ac-ad57-a41d-7b2c-3042bced478b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2708e264-d83e-30a3-5f87-db09f235d4ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2708e264-d83e-30a3-5f87-db09f235d4ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
