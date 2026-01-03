@@ -17,7 +17,7 @@ public class RTSCamera : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 25f;
-    [SerializeField] private float edgeSpeed = 35f;
+    //[SerializeField] private float edgeSpeed = 35f;
     [SerializeField] private float edgeSize = 15f;
 
     [Header("Zoom")]

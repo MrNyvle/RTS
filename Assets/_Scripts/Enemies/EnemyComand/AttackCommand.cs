@@ -35,8 +35,6 @@ namespace _Scripts.Enemies.EnemyComand
 
         public void Tick(Enemy unit)
         {
-            Debug.Log(_state);
-            
             switch (_state)
             {
                 case State.MovingToTarget:

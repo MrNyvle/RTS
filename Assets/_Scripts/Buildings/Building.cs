@@ -9,11 +9,18 @@ namespace _Scripts.Buildings
     {
         public BuildingResource buildingResource;
         public GameObject entrance;
+        public Canvas uiCanvas;
         public float depositTime;
         
         public Vector3 GetEntrancePosition()
         {
             return entrance.transform.position;
+        }
+
+        public void SetUIVisible(bool isVisible)
+        {
+            if (uiCanvas != null)
+                uiCanvas.gameObject.SetActive(isVisible);
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using _Scripts.Resource;
 using _Scripts.Unit;
 using _Scripts.Unit.Commands;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 namespace _Scripts
 {
@@ -39,8 +40,11 @@ namespace _Scripts
                 hit.collider.TryGetComponent(out GameResource resource);
                 hit.collider.TryGetComponent(out ResourceCollider resourceUnlimitedCollider);
                 hit.collider.TryGetComponent(out Building building);
+
+                if (GameManager.Instance.SelectedUnit == null)
+                    return;
                 
-                if (resource != null && GameManager.Instance.SelectedUnit != null)
+                if (resource != null)
                 {
                     GameManager.Instance.SelectedUnit.IssueCommand(new GatherResourceCommand(resource));
                 }
@@ -48,7 +52,7 @@ namespace _Scripts
                 {
                     GameManager.Instance.SelectedUnit.IssueCommand(new DepositCommand(building));
                 }
-                else if (resourceUnlimitedCollider != null && GameManager.Instance.SelectedUnit != null)
+                else if (resourceUnlimitedCollider != null)
                 {
                     GameManager.Instance.SelectedUnit.IssueCommand(new GatherResourceCommand(resourceUnlimitedCollider.Resource));
                 }
@@ -67,6 +71,26 @@ namespace _Scripts
         private void OnClickLeft(InputAction.CallbackContext obj)
         {
             TrySelectUnit();
+            TrySelectBuilding();
+        }
+
+        private void TrySelectBuilding()
+        {
+            Ray ray = GameManager.Instance.mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Debug.Log(hit.collider.name);
+                Building building = hit.collider.GetComponent<Building>();
+
+                if (building != null)
+                {
+                    SelectBuilding(building);
+                    return;
+                }
+                
+            }
+            DeselectBuilding();
         }
 
         void TrySelectUnit()
@@ -80,16 +104,10 @@ namespace _Scripts
                 if (unit != null)
                 {
                     SelectUnit(unit);
-                }
-                else
-                {
-                    DeselectUnit();
+                    return;
                 }
             }
-            else
-            {
-                DeselectUnit();
-            }
+            DeselectUnit();
         }
 
         void SelectUnit(VillageUnit newUnit)
@@ -100,6 +118,20 @@ namespace _Scripts
         void DeselectUnit()
         {
             GameManager.Instance.SelectedUnit = null;
+        }
+        
+        void SelectBuilding(Building newBuilding)
+        {
+            GameManager.Instance.SelectedBuilding = newBuilding;
+            newBuilding.SetUIVisible(true);
+        }
+
+        void DeselectBuilding()
+        {
+            if (GameManager.Instance.SelectedBuilding != null)
+                GameManager.Instance.SelectedBuilding.SetUIVisible(false);
+            
+            GameManager.Instance.SelectedBuilding = null;
         }
         
         private void OnDisable()

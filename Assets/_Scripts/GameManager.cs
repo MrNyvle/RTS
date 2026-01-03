@@ -12,6 +12,7 @@ namespace _Scripts
     public class GameManager : Singleton<GameManager>
     {
         public VillageUnit SelectedUnit { get; set; }
+        public Building SelectedBuilding { get; set; }
         public List<VillageUnitCombatStats> villageUnitCombatStats;
         public JobScalingBalancer  jobScalingBalancers;
         public List<TownHall> townHalls;

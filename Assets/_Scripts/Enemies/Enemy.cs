@@ -39,8 +39,7 @@ namespace _Scripts.Enemies
             
             if (_vision.SeesTarget())
             {
-                Debug.Log("Unit Seen");
-                IssueCommand(new AttackCommand(_vision.GetClosestTarget().transform));
+                IssueCommand(new AttackCommand(_vision.GetClosestTarget()));
             }
             
             _currentCommand?.Tick(this);

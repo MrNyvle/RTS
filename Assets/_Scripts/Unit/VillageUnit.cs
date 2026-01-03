@@ -67,7 +67,6 @@ namespace _Scripts.Unit
             
             if (_vision.SeesTarget())
             {
-                Debug.Log("Enemy Seen");
                 IssueCommand(new Flee(_vision));
             }
             

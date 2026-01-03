@@ -38,11 +38,10 @@ namespace _Scripts.Unit.Commands
 
         public bool SeesTarget()
         {
-            Debug.Log("Target Count: " + visibleTargets.Count);
             return visibleTargets.Count > 0;
         }
 
-        public Enemy GetClosestTarget()
+        public Transform GetClosestTarget()
         {
             if (visibleTargets.Count == 0)
                 return null;
@@ -60,11 +59,7 @@ namespace _Scripts.Unit.Commands
                     target = enemyTransform;
                 }
             }
-
-            Enemy enemy = null;
-            if (target != null) target.TryGetComponent(out enemy);
-            return enemy;
-
+            return target;
         }
 
         public Enemy GetClosestTarget2D()
