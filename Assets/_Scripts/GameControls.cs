@@ -3,6 +3,7 @@ using _Scripts.Buildings;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using _Scripts.Resource;
+using _Scripts.UI;
 using _Scripts.Unit;
 using _Scripts.Unit.Commands;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -28,8 +29,15 @@ namespace _Scripts
         private void OnClickRight(InputAction.CallbackContext obj)
         {
             TryAssignTask();
+            DeselectBuilding();
         }
-        
+
+        private void OnClickLeft(InputAction.CallbackContext obj)
+        {
+            TrySelectUnit();
+            TrySelectBuilding();
+        }
+
         private void TryAssignTask()
         {
             
@@ -68,12 +76,6 @@ namespace _Scripts
             }
         }
 
-        private void OnClickLeft(InputAction.CallbackContext obj)
-        {
-            TrySelectUnit();
-            TrySelectBuilding();
-        }
-
         private void TrySelectBuilding()
         {
             Ray ray = GameManager.Instance.mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -90,7 +92,6 @@ namespace _Scripts
                 }
                 
             }
-            DeselectBuilding();
         }
 
         void TrySelectUnit()
@@ -120,16 +121,16 @@ namespace _Scripts
             GameManager.Instance.SelectedUnit = null;
         }
         
-        void SelectBuilding(Building newBuilding)
+        void SelectBuilding(Building building)
         {
-            GameManager.Instance.SelectedBuilding = newBuilding;
-            newBuilding.SetUIVisible(true);
+            GameManager.Instance.SelectedBuilding = building;
+            UiManager.Instance.ShowUI(building);
         }
 
         void DeselectBuilding()
         {
             if (GameManager.Instance.SelectedBuilding != null)
-                GameManager.Instance.SelectedBuilding.SetUIVisible(false);
+                UiManager.Instance.HideUI();
             
             GameManager.Instance.SelectedBuilding = null;
         }

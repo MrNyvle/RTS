@@ -18,23 +18,12 @@ namespace _Scripts.Buildings
     }
     public class TownHall :  Building
     {
+        public override EBuilding eBuildingType => EBuilding.TownHall;
         public int id;
         
-        public Dictionary<EBuilding, Building> buildings = new () ;
-
-        public List<EBuildingBuilding> buildingList =  new List<EBuildingBuilding>();
-        
+        public List<Building> buildings=  new List<Building>();
         public List<VillageUnit> villageUnits = new List<VillageUnit>();
-
         public VillageUnit villageUnitPrefab;
-        
-        private void Awake()
-        {
-            foreach (var eBuildingBuilding in buildingList)
-            {
-                buildings.Add(eBuildingBuilding.eBuilding, eBuildingBuilding.building);
-            }
-        }
 
         [Button]
         public void SpawnVillageUnit()
@@ -65,9 +54,9 @@ namespace _Scripts.Buildings
         {
             Dictionary<EResource, int> villageResources = new Dictionary<EResource, int>();
             
-            foreach (KeyValuePair<EBuilding, Building> building in buildings)
+            foreach (Building building in buildings)
             {
-                foreach (var kp in building.Value.buildingResource._resources)
+                foreach (var kp in building.buildingResource._resources)
                 {
                     villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value;
                 }
@@ -78,11 +67,11 @@ namespace _Scripts.Buildings
         
         public Building GetBuildingForResource(EResource resource)
         {
-            foreach (var kp in buildings)
+            foreach (Building building in buildings)
             {
-                if (kp.Value.buildingResource.acceptedResources.Contains(resource))
+                if (building.buildingResource.acceptedResources.Contains(resource))
                 {
-                    return kp.Value;
+                    return building;
                 }
             }
             return null;

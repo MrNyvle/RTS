@@ -295,6 +295,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &118674972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 844773314554558595, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+  m_PrefabInstance: {fileID: 263751466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdd556d8f39421aa2b75b18a4b29fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.TownHallUI
+--- !u!114 &182702339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2061871286473792257, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+  m_PrefabInstance: {fileID: 263751466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1f55f7995845b4bdad103e5480d958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.TimberLodgerUI
 --- !u!1 &197666829
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +501,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: eBuildingUIs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: 'eBuildingUIs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 118674972}
+    - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: 'eBuildingUIs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 182702339}
     - target: {fileID: 1724135395845613343, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2676,7 +2710,6 @@ MonoBehaviour:
   buildingResource:
     acceptedResources: 00000000
   entrance: {fileID: 1501126622}
-  uiCanvas: {fileID: 0}
   depositTime: 1
 --- !u!1 &1771559521
 GameObject:
@@ -3629,7 +3662,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 837004988827603546, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
