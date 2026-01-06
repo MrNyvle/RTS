@@ -2,18 +2,21 @@ using System;
 using _Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class RTSCamera : MonoBehaviour
 {
     public bool handleMovement = true;
-    
+
     [Header("Input")]
     [SerializeField] private InputActionAsset inputActions;
+
     private InputAction moveAction;
     private InputAction zoomAction;
     private InputAction rotateAction;
     private InputAction rotateButtonAction;
     private InputAction centerCam;
+    private bool _isEnabled = true;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 25f;
@@ -68,8 +71,12 @@ public class RTSCamera : MonoBehaviour
 
     void Update()
     {
+        if (!_isEnabled)
+            return;
+        
         if (handleMovement)
             HandleMovement();
+        
         HandleZoom();
         HandleRotation();
         HandleCamCentering();
@@ -80,6 +87,11 @@ public class RTSCamera : MonoBehaviour
         LockToGround();
     }
 
+    public void CanMove(bool toggle)
+    {
+        _isEnabled = toggle;
+    }
+    
     private void HandleCamCentering()
     {
         if (!centerCam.IsPressed())

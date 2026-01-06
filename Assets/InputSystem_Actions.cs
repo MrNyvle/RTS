@@ -168,7 +168,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1144,6 +1144,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""cf3d66d9-ebbd-40fc-b18e-915c01c1f94c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1344,6 +1353,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""CenterCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c787f79-9496-4920-a405-7d5d18229631"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1443,6 +1463,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_RTS_LeftClick = m_RTS.FindAction("LeftClick", throwIfNotFound: true);
         m_RTS_RightClick = m_RTS.FindAction("RightClick", throwIfNotFound: true);
         m_RTS_CenterCam = m_RTS.FindAction("CenterCam", throwIfNotFound: true);
+        m_RTS_MousePosition = m_RTS.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1911,6 +1932,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_RTS_LeftClick;
     private readonly InputAction m_RTS_RightClick;
     private readonly InputAction m_RTS_CenterCam;
+    private readonly InputAction m_RTS_MousePosition;
     /// <summary>
     /// Provides access to input actions defined in input action map "RTS".
     /// </summary>
@@ -1950,6 +1972,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "RTS/CenterCam".
         /// </summary>
         public InputAction @CenterCam => m_Wrapper.m_RTS_CenterCam;
+        /// <summary>
+        /// Provides access to the underlying input action "RTS/MousePosition".
+        /// </summary>
+        public InputAction @MousePosition => m_Wrapper.m_RTS_MousePosition;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1997,6 +2023,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CenterCam.started += instance.OnCenterCam;
             @CenterCam.performed += instance.OnCenterCam;
             @CenterCam.canceled += instance.OnCenterCam;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
         }
 
         /// <summary>
@@ -2029,6 +2058,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @CenterCam.started -= instance.OnCenterCam;
             @CenterCam.performed -= instance.OnCenterCam;
             @CenterCam.canceled -= instance.OnCenterCam;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
         }
 
         /// <summary>
@@ -2332,5 +2364,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCenterCam(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MousePosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

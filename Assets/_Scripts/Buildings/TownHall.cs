@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using _Scripts.UI;
 using _Scripts.Unit;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Scripts.Buildings
 {
@@ -25,6 +22,8 @@ namespace _Scripts.Buildings
         public List<VillageUnit> villageUnits = new List<VillageUnit>();
         public VillageUnit villageUnitPrefab;
 
+        public float buildRange = 10;
+        
         [Button]
         public void SpawnVillageUnit()
         {
@@ -45,9 +44,9 @@ namespace _Scripts.Buildings
             return avg;
         }
         
-        public void AssignBuildings(Building building)
+        public void AssignBuilding(Building building)
         {
-            Dictionary<EBuilding, Building> buildings = new();
+            buildings.Add(building);
         }
 
         public Dictionary<EResource, int> GetVillageResources()

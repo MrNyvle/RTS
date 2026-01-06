@@ -29,6 +29,11 @@ namespace _Scripts.UI
 		    }
 	    }
 
+	    public void BuildTimberLodger()
+	    {
+		    BuildManager.Instance.BuildBuilding(EBuilding.TimberLodger);
+	    }
+
 	    public void ShowUI(Building building)
 	    {
 		    activeBuildingUI?.gameObject.SetActive(false);

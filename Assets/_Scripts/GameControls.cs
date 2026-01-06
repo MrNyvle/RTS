@@ -10,9 +10,9 @@ using Unity.VisualScripting.Dependencies.NCalc;
 
 namespace _Scripts
 {
-    public class GameControls : MonoBehaviour
+    public class GameControls : Singleton<GameControls>
     {
-        InputSystem_Actions actions;
+        public InputSystem_Actions actions;
         
         private void OnEnable()
         {
