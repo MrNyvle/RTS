@@ -20,37 +20,44 @@ namespace _Scripts
         private void Start()
         { 
             _gameControls = GameControls.Instance.actions;
-            _gameControls.RTS.LeftClick.canceled += PlaceBuilding;
         }
 
         private void PlaceBuilding(InputAction.CallbackContext obj)
         {
-            StopCoroutine(_followMouseCoroutine);
+            if (_followMouseCoroutine != null)
+                StopCoroutine(_followMouseCoroutine);
+            
             if (CanBuild(out TownHall hall))
             {
                 _building.TryGetComponent(out Building building);
                 hall.AssignBuilding(building);
                 building.transform.parent = hall.transform.parent;
             }
-            EnableCameraControls();
+            else
+            {
+                Destroy(_building.gameObject);
+            }
+            SwitchToCameraControls();
         }
 
-        private void EnableCameraControls()
+        private void SwitchToCameraControls()
         {
+            _gameControls.RTS.LeftClick.canceled -= PlaceBuilding;
             RTSCamera rts = GameManager.Instance.mainCamera.gameObject.GetComponentInParent<RTSCamera>();
             rts.CanMove(true);
         }
 
-        private void DisableCameraControls()
+        private void SwitchToBuildControls()
         {
             RTSCamera rts = GameManager.Instance.mainCamera.gameObject.GetComponentInParent<RTSCamera>();
             rts.CanMove(false);
+            _gameControls.RTS.LeftClick.canceled += PlaceBuilding;
         }
 
         public void BuildBuilding(EBuilding buildingType)
         {
-            DisableCameraControls();
-
+            SwitchToBuildControls();
+            
             Building buildingBP = buildingsBP.First(building => building.eBuildingType == buildingType);
             _building = Instantiate(buildingBP.gameObject);
             _followMouseCoroutine = StartCoroutine(BuildingFollowMouse());

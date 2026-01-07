@@ -8,7 +8,7 @@ namespace _Scripts.UI
 {
     public class ButtonUI : MonoBehaviour, IPointerDownHandler
     {
-        public UnityEvent onClick =  new UnityEvent();
+        public UnityEvent onClick = new UnityEvent();
 
         public void OnPointerDown(PointerEventData eventData)
         {
