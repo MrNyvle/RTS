@@ -40,7 +40,6 @@ namespace _Scripts
 
         private void TryAssignTask()
         {
-            
             Ray ray = GameManager.Instance.mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -58,7 +57,10 @@ namespace _Scripts
                 }
                 else if(building !=null)
                 {
-                    GameManager.Instance.SelectedUnit.IssueCommand(new DepositCommand(building));
+                    if (!building.isBuilt)
+                        GameManager.Instance.SelectedUnit.IssueCommand(new BuildCommand(building));
+                    else
+                        GameManager.Instance.SelectedUnit.IssueCommand(new DepositCommand(building));
                 }
                 else if (resourceUnlimitedCollider != null)
                 {

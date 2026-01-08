@@ -15,7 +15,7 @@ namespace _Scripts.Buildings
     }
     public class TownHall :  Building
     {
-        public override EBuilding eBuildingType => EBuilding.TownHall;
+        public override EBuilding EBuildingType => EBuilding.TownHall;
         public int id;
         
         public List<Building> buildings=  new List<Building>();
@@ -30,6 +30,30 @@ namespace _Scripts.Buildings
             VillageUnit villageUnit = Instantiate(villageUnitPrefab, GetEntrancePosition(), Quaternion.identity);
             villageUnit.AssignTownHall(this);
             villageUnits.Add(villageUnit);
+        }
+
+        [Button]
+        public void GiveResources()
+        {
+            Building g = GetBuildingForResource(EResource.Gold);
+            Building s = GetBuildingForResource(EResource.Stone);
+            Building w = GetBuildingForResource(EResource.Wood);
+            if (g)
+                g.resource.DepositResource(EResource.Gold, 10);
+            else
+                resource.DepositResource(EResource.Gold, 10);
+            
+            if (s)
+                s.resource.DepositResource(EResource.Stone,10);
+            else
+                resource.DepositResource(EResource.Stone, 10);
+            
+            if (w)
+                w.resource.DepositResource(EResource.Wood,10);
+            else
+                resource.DepositResource(EResource.Wood, 10);
+            
+            UpdateUI();
         }
 
         public float AvgTownCombatLevel()
@@ -55,25 +79,30 @@ namespace _Scripts.Buildings
             
             foreach (Building building in buildings)
             {
-                foreach (var kp in building.buildingResource._resources)
+                foreach (var kp in building.resource.GetResources())
                 {
                     villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value;
                 }
             }
             
+            foreach (var kp in resource.GetResources())
+            {
+                villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value;
+            }
+            
             return villageResources;
         }
         
-        public Building GetBuildingForResource(EResource resource)
+        public Building GetBuildingForResource(EResource res)
         {
             foreach (Building building in buildings)
             {
-                if (building.buildingResource.acceptedResources.Contains(resource))
+                if (building.resource.acceptedResources.Contains(res))
                 {
                     return building;
                 }
             }
-            return null;
+            return this;
         }
         
         public void UpdateUI()

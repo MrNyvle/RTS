@@ -8,7 +8,7 @@ namespace _Scripts.Buildings
     [Serializable]
     public class BuildingResource
     {
-        public Dictionary<EResource, int> _resources = new ();
+        private Dictionary<EResource, int> _resources = new ();
         public List<EResource> acceptedResources = new();
         
         public void Deposit(EResource type, VillageUnit unit)
@@ -36,9 +36,14 @@ namespace _Scripts.Buildings
             return false;
         }
         
-        public int GetResource(EResource resource)
+        public int GetResourceQuantity(EResource resource)
         {
             return _resources.GetValueOrDefault(resource);
+        }
+
+        public Dictionary<EResource, int> GetResources()
+        {
+            return _resources;
         }
     }
 }

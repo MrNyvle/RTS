@@ -7,17 +7,17 @@ namespace _Scripts.Buildings
 {
     public class TimberLodger : Building
     {
-        public override EBuilding eBuildingType => EBuilding.TimberLodger;
+        public override EBuilding EBuildingType => EBuilding.TimberLodger;
 
         public void DepositWood(VillageUnit unit)
         {
-            buildingResource.DepositResource(EResource.Wood,unit.unitResource.GetResourceQuantity(EResource.Wood));
-            unit.unitResource.ClearResource(EResource.Wood);
+            resource.DepositResource(EResource.Wood,unit.resource.GetResourceQuantity(EResource.Wood));
+            unit.resource.ClearResource(EResource.Wood);
         }
 
         public void UseWood(int quantity)
         {
-            buildingResource.UseResource(EResource.Wood, quantity);
+            resource.UseResource(EResource.Wood, quantity);
         }
     }
 }

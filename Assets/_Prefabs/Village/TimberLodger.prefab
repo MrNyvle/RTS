@@ -564,10 +564,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acbe2bf3ab0413e8fe276078707fb97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Buildings.TimberLodger
-  buildingResource:
-    acceptedResources: 00000000
   entrance: {fileID: 824002718392024787}
+  builtModel: {fileID: 3499598917082239204}
+  unBuiltModel: {fileID: 1429012448296346951}
+  resource:
+    acceptedResources: 00000000
+  stats: {fileID: 11400000, guid: 506111526b58a54b1a4f66df6dfece05, type: 2}
   depositTime: 1
+  isBuilt: 0
+  currentTier: 0
 --- !u!65 &8319498791496981553
 BoxCollider:
   m_ObjectHideFlags: 0

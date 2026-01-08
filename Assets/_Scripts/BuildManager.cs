@@ -58,7 +58,7 @@ namespace _Scripts
         {
             SwitchToBuildControls();
             
-            Building buildingBP = buildingsBP.First(building => building.eBuildingType == buildingType);
+            Building buildingBP = buildingsBP.First(building => building.EBuildingType == buildingType);
             _building = Instantiate(buildingBP.gameObject);
             _followMouseCoroutine = StartCoroutine(BuildingFollowMouse());
         }

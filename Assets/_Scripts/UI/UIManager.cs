@@ -37,7 +37,7 @@ namespace _Scripts.UI
 	    public void ShowUI(Building building)
 	    {
 		    activeBuildingUI?.gameObject.SetActive(false);
-		    switch (building.eBuildingType)
+		    switch (building.EBuildingType)
 		    {
 			    case EBuilding.TownHall:
 				    activeBuildingUI = ShowTownHallUI(building as TownHall);
@@ -82,7 +82,7 @@ namespace _Scripts.UI
 	    
 	    private BuildingUI ShowTownHallUI(TownHall townHall)
 	    {
-		    TownHallUI townHallUI = (TownHallUI)GetBuildingUI(townHall.eBuildingType);
+		    TownHallUI townHallUI = (TownHallUI)GetBuildingUI(townHall.EBuildingType);
 		    townHallUI.FillTownHallUI(townHall);
 		    
 		    return townHallUI;
@@ -90,7 +90,7 @@ namespace _Scripts.UI
 
 	    private BuildingUI ShowTimberLodger(TimberLodger timberLodger)
 	    {
-		    TimberLodgerUI timberLodgerUI = (TimberLodgerUI)GetBuildingUI(timberLodger.eBuildingType);
+		    TimberLodgerUI timberLodgerUI = (TimberLodgerUI)GetBuildingUI(timberLodger.EBuildingType);
 		    timberLodgerUI.FillTimberLodgerUI(timberLodger);
 		    return  timberLodgerUI;
 	    }

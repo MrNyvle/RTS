@@ -195,15 +195,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0721b393e148b6993f3b3d2cfad402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Buildings.TownHall
-  buildingResource:
-    acceptedResources: 
   entrance: {fileID: 622980456061639897}
-  uiCanvas: {fileID: 7299066678363291337}
+  builtModel: {fileID: 0}
+  unBuiltModel: {fileID: 0}
+  resource:
+    acceptedResources: 00000000010000000200000003000000
+  stats: {fileID: 0}
   depositTime: 2
+  isBuilt: 0
   id: 0
-  buildingList: []
+  buildings: []
   villageUnits: []
   villageUnitPrefab: {fileID: 2042611331111172227, guid: 4df793e53c5317bcab8c50059fe94c87, type: 3}
+  buildRange: 10
 --- !u!65 &4757586169419540755
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using _Scripts.Buildings;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace _Scripts.Unit.Commands
@@ -14,23 +15,22 @@ namespace _Scripts.Unit.Commands
 
         private Building _building;
         private State _state;
-        bool _finished;
         float _timer;
 
-        public bool IsFinished => _finished;
+        public bool IsFinished { get; set; }
         public EJobType JobType { get; set; }
 
         public DepositCommand(Building building)
         {
             _building = building;
             JobType = EJobType.Unemployed;
-            _finished = false;
+            IsFinished = false;
         }
 
         public void Start(VillageUnit unit)
         {
-            JobType = GameManager.Instance.resourceToJob[unit.unitResource.GetMostResource(out _)];
-            unit.unitVillagerJob.StartJob(JobType);
+            JobType = GameManager.Instance.resourceToJob[unit.resource.GetMostResource(out _)];
+            unit.job.StartJob(JobType);
             unit.Movement.MoveTo(unit.TownHall.GetEntrancePosition());
         }
 
@@ -58,9 +58,9 @@ namespace _Scripts.Unit.Commands
                 
                 case State.Depositing:
                     Debug.Log("Depositing");
-                    unit.DepositResources(_building.buildingResource);
-                    unit.unitVillagerJob.EndJob();
-                    _finished = true;
+                    unit.DepositResources(_building.resource);
+                    unit.job.EndJob();
+                    IsFinished = true;
                     break;
             }
         }
@@ -77,10 +77,16 @@ namespace _Scripts.Unit.Commands
             return _timer <= 0f;
         }
         
+        public void CancelTimer()
+        {
+            _timer = 0f;
+        }
+        
         public void Cancel(VillageUnit unit)
         {
             unit.Movement.Stop();
-            _finished = true;
+            CancelTimer();
+            IsFinished = true;
         }
     }
 }

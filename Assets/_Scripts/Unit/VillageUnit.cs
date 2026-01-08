@@ -13,9 +13,9 @@ namespace _Scripts.Unit
     [RequireComponent(typeof(Health))]
     public class VillageUnit : MonoBehaviour
     {
-        public UnitResource unitResource = new ();
+        public UnitResource resource = new ();
         public VillagerUI villagerUI;
-        public UnitVillagerJob unitVillagerJob;
+        public UnitVillagerJob job;
 
         public int lumberjackPoint;
 
@@ -32,7 +32,7 @@ namespace _Scripts.Unit
         
         private void Awake()
         {
-            unitVillagerJob = new UnitVillagerJob(unitStats);
+            job = new UnitVillagerJob(unitStats);
             TryGetComponent(out _vision);
             TryGetComponent(out _unitMovement);
             TryGetComponent(out _health);
@@ -46,7 +46,7 @@ namespace _Scripts.Unit
         [Button]
         public void UpdateUI()
         {
-            villagerUI.UpdateUI(unitResource);
+            villagerUI.UpdateUI(resource);
         }
 
         public void AssignCombatType(ECombatArchetype combatType)
@@ -100,21 +100,21 @@ namespace _Scripts.Unit
         
         public void AddResource(EResource eResource, int quantity)
         {
-            unitResource.AddResourceToInv(eResource, quantity);
-            villagerUI.UpdateUI(unitResource);
+            resource.AddResourceToInv(eResource, quantity);
+            villagerUI.UpdateUI(resource);
         }
 
         public void DepositResources(BuildingResource resource)
         {
-            unitResource.DepositResourceToBuilding(resource);
-            villagerUI.UpdateUI(unitResource);
+            this.resource.DepositResourceToBuilding(resource);
+            villagerUI.UpdateUI(this.resource);
             _townHall.UpdateUI();
         }
         
         public void ClearResources()
         {
-            unitResource.Clear();
-            villagerUI.UpdateUI(unitResource);
+            resource.Clear();
+            villagerUI.UpdateUI(resource);
         }
     }
 }

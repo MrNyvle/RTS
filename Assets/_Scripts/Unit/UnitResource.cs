@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using _Scripts.Buildings;
+using UnityEngine;
 
 namespace _Scripts.Unit
 {
@@ -53,6 +53,15 @@ namespace _Scripts.Unit
         public void ClearResource(EResource eResource)
         {
             resourcesTransported[eResource] = 0;
+        }
+
+        public bool RemoveResource(EResource eResource, int quantity)
+        {
+            if (resourcesTransported[eResource] - quantity < 0)
+                return false;
+            
+            resourcesTransported[eResource] -= quantity;
+            return true;
         }
         
         public void Clear()

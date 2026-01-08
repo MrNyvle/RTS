@@ -12,9 +12,8 @@ namespace _Scripts.Unit.Commands
         private float _safeDistance = 15f;
         private float _updateInterval = 0.2f;
         private float _timer;
-
-        private bool _finished;
-        public bool IsFinished => _finished;
+        
+        public bool IsFinished { get; set; }
         public EJobType JobType { get; set; } = EJobType.Unemployed;
 
         public Flee(Vision vision)
@@ -25,7 +24,7 @@ namespace _Scripts.Unit.Commands
         public void Start(VillageUnit unit)
         {
             _unit = unit;
-            _finished = false;
+            IsFinished = false;
             _timer = 0f;
         }
 
@@ -34,7 +33,7 @@ namespace _Scripts.Unit.Commands
             if (_vision.visibleTargets.Count == 0)
             {
                 // No enemies, stop fleeing
-                _finished = true;
+                IsFinished = true;
                 unit.Movement.Stop();
                 return;
             }
@@ -54,14 +53,14 @@ namespace _Scripts.Unit.Commands
             // Check if safe
             if (Vector3.Distance(_unit.transform.position, enemyCenter) > _safeDistance)
             {
-                _finished = true;
+                IsFinished = true;
                 unit.Movement.Stop();
             }
         }
 
         public void Cancel(VillageUnit unit)
         {
-            _finished = true;
+            IsFinished = true;
             unit.Movement.Stop();
         }
 

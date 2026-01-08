@@ -19,21 +19,21 @@ namespace _Scripts.Unit.Commands
         GameResource _resource;
         Building _building;
         float _timer;
-        bool _finished;
     
-        public bool IsFinished => _finished;
+        public bool IsFinished { get; set; }
+        public float Timer { get; set; }
         public EJobType JobType { get; set; }
 
         public GatherResourceCommand(GameResource resource)
         {
             JobType = EJobType.Lumberjack;
             _resource = resource;
-            _finished = false;
+            IsFinished = false;
         }
     
         public void Start(VillageUnit unit)
         {
-            unit.unitVillagerJob.StartJob(JobType);
+            unit.job.StartJob(JobType);
             _state = State.MovingToResource;
             unit.Movement.MoveTo(_resource.GetPosition());
             _building = unit.TownHall.GetBuildingForResource(_resource.eResource);
@@ -83,9 +83,9 @@ namespace _Scripts.Unit.Commands
                     break;
                 
                 case State.Depositing:
-                    unit.DepositResources(_building.buildingResource);
-                    unit.unitVillagerJob.EndJob();
-                    _finished = true;
+                    unit.DepositResources(_building.resource);
+                    unit.job.EndJob();
+                    IsFinished = true;
                     break;
             }
         }
@@ -94,7 +94,7 @@ namespace _Scripts.Unit.Commands
         {
             _timer = time;
         }
-
+        
         public bool TickTimer(float deltaTime)
         {
             if (!_resource.isValid) return true;
@@ -108,7 +108,7 @@ namespace _Scripts.Unit.Commands
         {
             unit.Movement.Stop();
             CancelTimer();
-            _finished = true;
+            IsFinished = true;
         }
 
         public void CancelTimer()
@@ -120,7 +120,7 @@ namespace _Scripts.Unit.Commands
         {
             if (_resource.eResourceType == EResourceType.Unlimited)
             {
-                _finished = false;
+                IsFinished = false;
                 Start(unit);
             }
         }

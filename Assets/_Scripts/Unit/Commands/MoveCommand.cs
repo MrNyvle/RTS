@@ -12,21 +12,20 @@ namespace _Scripts.Unit.Commands
 
         State _state;
         Vector3 _movePosition;
-        bool _finished;
         
-        public bool IsFinished => _finished;
+        public bool IsFinished { get; set; }
         public EJobType JobType { get; set; }
 
         public MoveCommand(Vector3 movePosition)
         {
             JobType = EJobType.Unemployed;
             _movePosition = movePosition;
-            _finished = false;
+            IsFinished = false;
         }
 
         public void Start(VillageUnit unit)
         {
-            unit.unitVillagerJob.StartJob(JobType);
+            unit.job.StartJob(JobType);
             unit.Movement.MoveTo(_movePosition);
             _state = State.MovingToPosition;
         }
@@ -38,8 +37,8 @@ namespace _Scripts.Unit.Commands
                 case State.MovingToPosition:
                     if (unit.Movement.Reached())
                     {
-                        _finished = true;
-                        unit.unitVillagerJob.EndJob();
+                        IsFinished = true;
+                        unit.job.EndJob();
                     }
                     break;
             }
