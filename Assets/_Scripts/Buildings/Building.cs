@@ -16,7 +16,7 @@ namespace _Scripts.Buildings
     }
     
     [Serializable]
-    public class Building : MonoBehaviour
+    public abstract class Building : MonoBehaviour
     {
         public virtual EBuilding EBuildingType { get; set; }
         public GameObject entrance;

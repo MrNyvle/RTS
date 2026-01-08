@@ -63,9 +63,11 @@ namespace _Scripts.Unit.Commands
             case State.GrabbingResource:
                 Debug.Log("Grabbing resource");
                 bool usedItems = unit.TownHall.GetBuildingForResource(_resourceToFetch).resource.UseResource(_resourceToFetch, _quantityToFetch);
+                unit.TownHall.UpdateUI();
                 if (usedItems)
                 {
                     unit.resource.AddResourceToInv(_resourceToFetch, _quantityToFetch);
+                    unit.UpdateUI();
                     unit.Movement.MoveTo(_building.gameObject.transform.position);
                     _state = State.MovingToBuilding;
                     break;
@@ -87,6 +89,7 @@ namespace _Scripts.Unit.Commands
                     IsFinished = true;
                     break;
                 }
+                unit.UpdateUI();
                 if (NeedToGetResourcesForBuild())
                 {
                     unit.Movement.MoveTo(unit.TownHall.GetBuildingForResource(_resourceToFetch).GetEntrancePosition());

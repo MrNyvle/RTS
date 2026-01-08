@@ -29,6 +29,7 @@ namespace _Scripts.UI.Villager
                 foreach (KeyValuePair<EResource, ResourceItem> kvp in _resourcesItemsUI)
                 {
                     kvp.Value.gameObject.SetActive(false);
+                    return;
                 }
             }
             
