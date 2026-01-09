@@ -31,7 +31,7 @@ namespace _Scripts.Unit.Commands
         {
             JobType = GameManager.Instance.resourceToJob[unit.resource.GetMostResource(out _)];
             unit.job.StartJob(JobType);
-            unit.Movement.MoveTo(unit.TownHall.GetEntrancePosition());
+            unit.Movement.MoveTo(_building.GetEntrancePosition());
         }
 
         public void Tick(VillageUnit unit)

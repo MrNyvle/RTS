@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Resource;
 using _Scripts.UI;
 using _Scripts.Unit;
 using NaughtyAttributes;
@@ -103,6 +104,36 @@ namespace _Scripts.Buildings
                 }
             }
             return this;
+        }
+
+        public List<Building> GetBuildingsForResource(EResource res)
+        {
+            List<Building> bldngs = new List<Building>();
+            foreach (Building building in buildings) {
+                if (building.resource.acceptedResources.Contains(res))
+                {
+                    bldngs.Add(building);
+                }
+            }
+            
+            return bldngs;
+        }
+
+        public Building GetClosestToResource(List<Building> buildingList, GameResource res)
+        {
+            float distance = float.MaxValue;
+            Building closest = null;
+            foreach (var building in buildingList)
+            {
+                float dist = Vector3.Distance(building.GetEntrancePosition(), res.GetPosition());
+
+                if (dist < distance)
+                {
+                    distance = dist;
+                    closest = building;
+                }
+            }
+            return closest;
         }
         
         public void UpdateUI()

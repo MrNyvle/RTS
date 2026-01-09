@@ -13,6 +13,7 @@ namespace _Scripts.Unit.Commands
             MovingToBuilding,
             DepositingResource,
             Building,
+            MovingToBuildingEntrance
         }
         
         State _state;
@@ -104,10 +105,19 @@ namespace _Scripts.Unit.Commands
                 if (TickTimer(Time.deltaTime))
                 {
                     _building.Build();
+                    unit.Movement.MoveTo(_building.GetEntrancePosition());
+                    _state =  State.MovingToBuildingEntrance;
+                }
+                break;
+            case State.MovingToBuildingEntrance:
+                if (unit.Movement.Reached())
+                {
+                    GameManager.Instance.RebuildNavmesh();
                     IsFinished = true;
                 }
                 break;
             }
+            
         }
 
         public void StartTimer(float time)

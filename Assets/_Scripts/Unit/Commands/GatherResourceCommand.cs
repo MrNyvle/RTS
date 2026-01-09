@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _Scripts.Buildings;
 using _Scripts.Resource;
 using UnityEngine;
@@ -36,7 +37,9 @@ namespace _Scripts.Unit.Commands
             unit.job.StartJob(JobType);
             _state = State.MovingToResource;
             unit.Movement.MoveTo(_resource.GetPosition());
-            _building = unit.TownHall.GetBuildingForResource(_resource.eResource);
+
+            List<Building> buildings = unit.TownHall.GetBuildingsForResource(_resource.eResource);
+            _building = unit.TownHall.GetClosestToResource(buildings,  _resource);
         }
     
         public void Tick(VillageUnit unit)

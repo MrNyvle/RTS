@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
 using _ScriptableObjects.VillageUnit;
 using _ScriptableObjects.VillageUnit.JobScaling;
 using _Scripts.Buildings;
 using _Scripts.Enemies;
 using _Scripts.Unit;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Scripts
 {
@@ -13,11 +14,12 @@ namespace _Scripts
     {
         public VillageUnit SelectedUnit { get; set; }
         public Building SelectedBuilding { get; set; }
+        public NavMeshSurface navMesh;
         public List<VillageUnitCombatStats> villageUnitCombatStats;
         public JobScalingBalancer  jobScalingBalancers;
         public List<TownHall> townHalls;
         
-        public Dictionary<EResource, EJobType> resourceToJob =  new Dictionary<EResource, EJobType>()
+        public readonly Dictionary<EResource, EJobType> resourceToJob =  new Dictionary<EResource, EJobType>()
         {
             {EResource.Wood, EJobType.Lumberjack},
             {EResource.Stone, EJobType.Miner},
@@ -25,7 +27,7 @@ namespace _Scripts
             {EResource.Gold, EJobType.Seller},
             {EResource.Shiny, EJobType.Priest}
         };
-        public Dictionary<EJobType, EResource> jobToResource =  new Dictionary<EJobType, EResource>()
+        public readonly Dictionary<EJobType, EResource> jobToResource =  new Dictionary<EJobType, EResource>()
         {
             {EJobType.Lumberjack, EResource.Wood},
             {EJobType.Miner, EResource.Stone},
@@ -33,7 +35,7 @@ namespace _Scripts
             {EJobType.Seller, EResource.Gold},
             {EJobType.Priest, EResource.Shiny}
         };
-        public Dictionary<EResource, EBuilding> resourceToBuilding =  new Dictionary<EResource, EBuilding>()
+        public readonly Dictionary<EResource, EBuilding> resourceToBuilding =  new Dictionary<EResource, EBuilding>()
         {
             {EResource.Wood, EBuilding.TimberLodger},
             {EResource.Stone, EBuilding.PebbleTemple},
@@ -41,7 +43,7 @@ namespace _Scripts
             {EResource.Gold, EBuilding.CashStash},
             {EResource.Shiny, EBuilding.ShineShrine}
         };
-        public Dictionary<EBuilding, EResource> buildingToResource =  new Dictionary<EBuilding, EResource>()
+        public readonly Dictionary<EBuilding, EResource> buildingToResource =  new Dictionary<EBuilding, EResource>()
         {
             {EBuilding.TimberLodger, EResource.Wood},
             {EBuilding.PebbleTemple, EResource.Stone},
@@ -49,7 +51,7 @@ namespace _Scripts
             {EBuilding.CashStash, EResource.Gold},
             {EBuilding.ShineShrine, EResource.Shiny}
         };
-        public Dictionary<EBuilding, EJobType> buildingToJob =  new Dictionary<EBuilding, EJobType>()
+        public readonly Dictionary<EBuilding, EJobType> buildingToJob =  new Dictionary<EBuilding, EJobType>()
         {
             {EBuilding.TimberLodger, EJobType.Lumberjack},
             {EBuilding.PebbleTemple, EJobType.Miner},
@@ -57,7 +59,7 @@ namespace _Scripts
             {EBuilding.CashStash, EJobType.Seller},
             {EBuilding.ShineShrine, EJobType.Priest}
         };
-        public Dictionary<EJobType, EBuilding> jobToBuilding =  new Dictionary<EJobType, EBuilding>()
+        public readonly Dictionary<EJobType, EBuilding> jobToBuilding =  new Dictionary<EJobType, EBuilding>()
         {
             {EJobType.Lumberjack, EBuilding.TimberLodger},
             { EJobType.Miner,  EBuilding.PebbleTemple},
@@ -69,7 +71,11 @@ namespace _Scripts
         public List<Enemy> Enemies = new List<Enemy>();
         
         public Camera mainCamera;
-        
+
+        public void RebuildNavmesh()
+        {
+            navMesh.BuildNavMesh();
+        }
 
         public VillageUnitCombatStats GetCombatStats(ECombatArchetype eCombatType)
         {
