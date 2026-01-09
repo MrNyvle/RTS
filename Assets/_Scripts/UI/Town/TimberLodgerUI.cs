@@ -6,16 +6,14 @@ namespace _Scripts.UI
 {
     public class TimberLodgerUI : BuildingUI
     {
-        public new EBuilding BuildingType => EBuilding.TimberLodger;
+        public override EBuilding BuildingType => EBuilding.TimberLodger;
 
         private TimberLodger _timberLodger;
-        public TextMeshProUGUI buildingName;
-        
-        public void FillTimberLodgerUI(TimberLodger timberLodger)
+
+        public override void FillUI(Building building)
         {
-            _timberLodger = timberLodger;
-            buildingName.text = timberLodger.name;
+            _timberLodger = building as TimberLodger;
+            buildingName.text = _timberLodger?.name;
         }
-        
     }
 }

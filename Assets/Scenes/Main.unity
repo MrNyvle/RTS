@@ -317,6 +317,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1f55f7995845b4bdad103e5480d958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.TimberLodgerUI
+--- !u!114 &190331242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4311254936723676000, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+  m_PrefabInstance: {fileID: 263751466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2459b81938814e79bcb66e17d6117ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.UI.SoldierCofferUI
 --- !u!1 &197666829
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,8 +545,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: townHalls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: eBuildingUIs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: 'eBuildingUIs.Array.data[0]'
@@ -545,6 +560,10 @@ PrefabInstance:
       propertyPath: 'eBuildingUIs.Array.data[1]'
       value: 
       objectReference: {fileID: 182702339}
+    - target: {fileID: 1706321423145394728, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: 'eBuildingUIs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 190331242}
     - target: {fileID: 1724135395845613343, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -804,6 +823,10 @@ PrefabInstance:
     - target: {fileID: 7420193004476997713, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: m_ChildAlignment
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555723358012861268, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_Name
+      value: SoldierCofferUI
       objectReference: {fileID: 0}
     - target: {fileID: 8577766301430977940, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1346,6 +1369,11 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!4 &739020940 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+  m_PrefabInstance: {fileID: 7829472102257296628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &788979951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,6 +2955,7 @@ Transform:
   m_Children:
   - {fileID: 1678531660}
   - {fileID: 793191175}
+  - {fileID: 739020940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1957521911
@@ -3552,6 +3581,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc3ea7249d0755460b8239ba35cfe50d, type: 3}
+--- !u!1001 &7829472102257296628
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1941299723}
+    m_Modifications:
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.752
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.13311
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903799875609288792, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037600259668681307, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+      propertyPath: m_Name
+      value: SoldierCoffer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+--- !u!114 &7829472102257296629 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1049242505763611279, guid: 3be9579c50ea231e6babc1a29e1134e4, type: 3}
+  m_PrefabInstance: {fileID: 7829472102257296628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ffa009a1c54f2fa675ead1216c7635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Buildings.SoldierCoffer
 --- !u!1001 &9118212706356821973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3647,7 +3744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1171731961656535678, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
       propertyPath: buildings.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1171731961656535678, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
       propertyPath: buildingList.Array.size
@@ -3657,6 +3754,10 @@ PrefabInstance:
       propertyPath: 'buildings.Array.data[0]'
       value: 
       objectReference: {fileID: 1678531661}
+    - target: {fileID: 1171731961656535678, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
+      propertyPath: 'buildings.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7829472102257296629}
     - target: {fileID: 1171731961656535678, guid: ad8952c5110489508b0bedee9f883d0b, type: 3}
       propertyPath: buildingList.Array.data[0].building
       value: 

@@ -7,19 +7,14 @@ namespace _Scripts.UI
 {
     public class TownHallUI : BuildingUI
     {
-        public new EBuilding BuildingType
-        {
-            get => EBuilding.TownHall;
-            set => buildingType = value;
-        }
+        public override EBuilding BuildingType => EBuilding.TownHall;
         
-        public TextMeshProUGUI buildingName;
         private TownHall _townHall;
 
-        public void FillTownHallUI(TownHall townHall)
+        public override void FillUI(Building building)
         {
-            _townHall = townHall;
-            buildingName.text = townHall.name;
+            _townHall = building as TownHall;
+            buildingName.text = _townHall?.name;
         }
 
         public void SpawnUnit()

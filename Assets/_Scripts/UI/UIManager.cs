@@ -16,7 +16,6 @@ namespace _Scripts.UI
 	    public BuildingUI activeBuildingUI;
 	    
     	[FormerlySerializedAs("_resourceBars")] public List<ResourceBar> resourceBars;
-	    [FormerlySerializedAs("_townHalls")] public List<TownHallUI> townHalls;
 	    [FormerlySerializedAs("_eBuildingUI")] public List<BuildingUI>  eBuildingUIs;
 	    
 
@@ -37,27 +36,9 @@ namespace _Scripts.UI
 	    public void ShowUI(Building building)
 	    {
 		    activeBuildingUI?.gameObject.SetActive(false);
-		    switch (building.EBuildingType)
-		    {
-			    case EBuilding.TownHall:
-				    activeBuildingUI = ShowTownHallUI(building as TownHall);
-				    break;
-			    case EBuilding.TimberLodger:
-				    activeBuildingUI = ShowTimberLodger(building as TimberLodger);
-				    break;
-			    case EBuilding.PebbleTemple:
-				    break;
-			    case EBuilding.BreadShed:
-				    break;
-			    case EBuilding.CashStash:
-				    break;
-			    case EBuilding.ShineShrine:
-				    break;
-			    case EBuilding.MayasFire:
-				    break;
-			    default:
-				    throw new ArgumentOutOfRangeException();
-		    }
+		    
+		    activeBuildingUI = ShowBuildingUI(building);
+		    
 		    activeBuildingUI.gameObject.SetActive(true);
 	    }
 
@@ -80,19 +61,11 @@ namespace _Scripts.UI
 		    return null;
 	    }
 	    
-	    private BuildingUI ShowTownHallUI(TownHall townHall)
+	    private BuildingUI ShowBuildingUI(Building building)
 	    {
-		    TownHallUI townHallUI = (TownHallUI)GetBuildingUI(townHall.EBuildingType);
-		    townHallUI.FillTownHallUI(townHall);
-		    
-		    return townHallUI;
-	    }
-
-	    private BuildingUI ShowTimberLodger(TimberLodger timberLodger)
-	    {
-		    TimberLodgerUI timberLodgerUI = (TimberLodgerUI)GetBuildingUI(timberLodger.EBuildingType);
-		    timberLodgerUI.FillTimberLodgerUI(timberLodger);
-		    return  timberLodgerUI;
+		    BuildingUI buildingUI = GetBuildingUI(building.EBuildingType);
+		    buildingUI.FillUI(building);
+		    return buildingUI;
 	    }
     }
 }

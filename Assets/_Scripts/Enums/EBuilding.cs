@@ -11,6 +11,7 @@ namespace _Scripts.Unit
         BreadShed,
         CashStash,
         ShineShrine,
-        MayasFire
+        MayasFire,
+        SoldierCoffer,
     }
 }
