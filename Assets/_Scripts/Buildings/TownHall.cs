@@ -71,6 +71,7 @@ namespace _Scripts.Buildings
         
         public void AssignBuilding(Building building)
         {
+            building.townHall = this;
             buildings.Add(building);
         }
 

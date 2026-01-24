@@ -13,5 +13,12 @@ namespace _Scripts.UI
             _soldierCoffer = building as SoldierCoffer;
             buildingName.text = _soldierCoffer?.name;
         }
+
+        public void MakeBasicUnit()
+        {
+            _soldierCoffer.MakeMilitaryUnit(ECombatArchetype.Basic);
+        }
+        public void MakeTank(){}
+        public void MakeAssassin(){}
     }
 }

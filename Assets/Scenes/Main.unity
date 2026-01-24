@@ -796,10 +796,50 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5873654193078120256, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873654193078120256, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873654193078120256, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873654193078120256, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6625054981771698030, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: resourceItemGo
       value: 
       objectReference: {fileID: 2266421578554485802, guid: 8ac309282d599b75dbb1be21bd8f9458, type: 3}
+    - target: {fileID: 6800926652186340630, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800926652186340630, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800926652186340630, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800926652186340630, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800926652186340630, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800926652186340630, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7284401817315571742, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -857,6 +897,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8815159911012797922, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884673551866742941, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884673551866742941, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884673551866742941, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884673551866742941, guid: b62a6c0e965c3de4ca48a73231950d8c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -3721,6 +3777,18 @@ PrefabInstance:
       propertyPath: 'townHalls.Array.data[0]'
       value: 
       objectReference: {fileID: 9180776387441967542}
+    - target: {fileID: 195417891002490900, guid: f9bdeb32755c63d4787971c216445b0f, type: 3}
+      propertyPath: archetypePrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195417891002490900, guid: f9bdeb32755c63d4787971c216445b0f, type: 3}
+      propertyPath: archetypePrefabs.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 2042611331111172227, guid: 4df793e53c5317bcab8c50059fe94c87, type: 3}
+    - target: {fileID: 195417891002490900, guid: f9bdeb32755c63d4787971c216445b0f, type: 3}
+      propertyPath: archetypePrefabs.Array.data[0].archetype
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 447529758289233214, guid: f9bdeb32755c63d4787971c216445b0f, type: 3}
       propertyPath: m_Name
       value: GameManager

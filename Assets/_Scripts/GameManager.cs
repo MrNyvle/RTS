@@ -16,6 +16,7 @@ namespace _Scripts
         public Building SelectedBuilding { get; set; }
         public NavMeshSurface navMesh;
         public List<VillageUnitCombatStats> villageUnitCombatStats;
+        public List<ArchetypePrefab> archetypePrefabs;
         public JobScalingBalancer  jobScalingBalancers;
         public List<TownHall> townHalls;
         
@@ -80,6 +81,11 @@ namespace _Scripts
         public VillageUnitCombatStats GetCombatStats(ECombatArchetype eCombatType)
         {
             return villageUnitCombatStats.Find(stats => stats.eCombatType == eCombatType);
+        }
+
+        public VillageUnit GetArchetypePrefab(ECombatArchetype eCombatType)
+        {
+            return archetypePrefabs.Find(prefab => prefab.archetype == eCombatType ).prefab;
         }
     }
 }

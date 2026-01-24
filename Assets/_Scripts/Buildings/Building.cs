@@ -19,6 +19,7 @@ namespace _Scripts.Buildings
     public abstract class Building : MonoBehaviour
     {
         public virtual EBuilding EBuildingType { get; set; }
+        public TownHall townHall;
         public GameObject entrance;
         public GameObject builtModel;
         public GameObject unBuiltModel;

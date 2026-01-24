@@ -20,6 +20,13 @@ namespace _Scripts
     }
 
     [Serializable]
+    public class ArchetypePrefab
+    {
+        public ECombatArchetype archetype;
+        public VillageUnit prefab;
+    }
+    
+    [Serializable]
     public class ResourcesCost
     {
         public int gold;
