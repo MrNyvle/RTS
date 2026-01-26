@@ -16,6 +16,7 @@ namespace _Scripts
         public Building SelectedBuilding { get; set; }
         public NavMeshSurface navMesh;
         public List<VillageUnitCombatStats> villageUnitCombatStats;
+        public VillageUnitPrice villageUnitPrice;
         public List<ArchetypePrefab> archetypePrefabs;
         public JobScalingBalancer  jobScalingBalancers;
         public List<TownHall> townHalls;

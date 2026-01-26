@@ -136,7 +136,49 @@ namespace _Scripts.Buildings
             }
             return closest;
         }
-        
+
+        public bool CanAfford(List<(EResource, int)> resources)
+        {
+            Dictionary<EResource, int> villageResources = GetVillageResources();
+            
+            foreach (var res in resources)
+            {
+                if (!villageResources.ContainsKey(res.Item1))
+                    return false;
+                if (villageResources[res.Item1] < res.Item2)
+                    return false;
+                
+            }
+            return true;
+        }
+
+        public void UseResources(List<(EResource, int)> resources)
+        {
+            foreach (var res in resources)
+            {
+                List<Building> buildings = GetBuildingsForResource(res.Item1);
+                
+                int resourceToUse = res.Item2;
+                int buildingIndex = 0;
+                
+                while (resourceToUse > 0)
+                {
+                    if (resourceToUse < buildings[buildingIndex].resource.GetResources()[res.Item1])
+                    {
+                        buildings[buildingIndex].resource.UseResource(res.Item1, resourceToUse);
+                        resourceToUse = 0;
+                    }
+                    else
+                    {
+                        resourceToUse -= buildings[buildingIndex].resource.GetResources()[res.Item1];
+                        buildingIndex++;
+                    }
+                }
+            }
+            
+            UpdateUI();
+        }
+
         public void UpdateUI()
         {
             UiManager.Instance.UpdateResourceBar(this);

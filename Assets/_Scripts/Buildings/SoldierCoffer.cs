@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using _Scripts.UI;
 using _Scripts.Unit;
 using UnityEngine;
@@ -11,6 +13,20 @@ namespace _Scripts.Buildings
 
         public void MakeMilitaryUnit(ECombatArchetype eCombatArchetype)
         {
+            int unitPrice = GameManager.Instance.villageUnitPrice.GetPrice(eCombatArchetype);
+            
+            List<(EResource, int)> prices = new List<(EResource, int)>(){ (EResource.Gold,unitPrice)};
+            
+            bool canAfford = townHall.CanAfford(prices);
+            if (!canAfford) return;
+            townHall.UseResources(prices);
+
+            StartCoroutine(MakeMilitaryUnitCoroutine(GameManager.Instance.villageUnitPrice.GetTime(eCombatArchetype), eCombatArchetype));
+        }
+
+        private IEnumerator MakeMilitaryUnitCoroutine(float time, ECombatArchetype eCombatArchetype)
+        {
+            yield return new WaitForSeconds(time);
             SpawnMilitaryUnit(eCombatArchetype);
         }
         
