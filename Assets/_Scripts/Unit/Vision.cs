@@ -59,7 +59,7 @@ namespace _Scripts.Unit.Commands
                 enemyTransform.TryGetComponent(out VillageUnit villageUnit);
                 if (villageUnit.unitStats.eCombatType == ECombatArchetype.Peasant)
                 {
-                    nextElement: continue;
+                   continue;
                 }
                 
                 float dist = Vector3.Distance(enemyTransform.position , transform.position);

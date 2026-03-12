@@ -1,3 +1,5 @@
+using System;
+
 namespace _Scripts.Unit.Commands
 {
     public interface IUnitCommand
@@ -6,6 +8,7 @@ namespace _Scripts.Unit.Commands
         void Tick(VillageUnit unit);
 
         void Cancel(VillageUnit unit);
+        string GetState();
         bool IsFinished { get; }
         bool IsRepeatable => false;
         EJobType JobType { get; set; }

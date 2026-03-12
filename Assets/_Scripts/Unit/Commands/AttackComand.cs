@@ -13,13 +13,19 @@ namespace _Scripts.Unit.Commands
             Attacking,
             MovingToOrigin
         }
-        
+
+        public string GetState()
+        {
+            return _state.ToString();
+        }
+
         public bool IsFinished { get; set; }
         public EJobType JobType { set; get; }
 
         private State _state;
         private Transform target;
         private Health _targetHealth;
+        private Vector3 originalPosition;
         float _timer;
 
         public AttackComand()
@@ -39,7 +45,9 @@ namespace _Scripts.Unit.Commands
                 case State.Guarding:
                     if (unit.vision.SeesTarget())
                     {
+                        originalPosition = unit.transform.position;
                         target = unit.vision.GetClosestTarget();
+                        target.TryGetComponent(out _targetHealth);
                         _state = State.MovingInRange;
                     }
                     break;
@@ -61,17 +69,22 @@ namespace _Scripts.Unit.Commands
                     if (TickTimer(Time.deltaTime))
                     {
                         _targetHealth.Damage(unit.unitStats.GetCombatStat(ECombatStat.AttackPoints));
+                        Debug.Log("Attacking | Is Target ded : " + _targetHealth.IsDead());
                         StartTimer(unit.unitStats.GetCombatStat(ECombatStat.AttackSpeedPoints));
                         if (_targetHealth.IsDead())
                         {
                             CancelTimer();
+                            unit.Movement.MoveTo(originalPosition);
                             _state = State.MovingToOrigin;
                         }
                     }
                     break;
                 
                 case State.MovingToOrigin:
-                    unit.job.EndJob();
+                    if (unit.Movement.Reached())
+                    {
+                        unit.job.EndJob();
+                    }
                     break;
                 
                 default:
@@ -105,6 +118,7 @@ namespace _Scripts.Unit.Commands
         {
             unit.Movement.Stop();
             CancelTimer();
+            unit.IsAttacking = false;
             IsFinished = true;
         }
     }

@@ -12,7 +12,12 @@ namespace _Scripts.Unit.Commands
         private float _safeDistance = 15f;
         private float _updateInterval = 0.2f;
         private float _timer;
-        
+
+        public string GetState()
+        {
+            return "Fleeing";
+        }
+
         public bool IsFinished { get; set; }
         public EJobType JobType { get; set; } = EJobType.Unemployed;
 
@@ -26,6 +31,13 @@ namespace _Scripts.Unit.Commands
             _unit = unit;
             IsFinished = false;
             _timer = 0f;
+        }
+
+        public void Cancel(VillageUnit unit)
+        {
+            unit.IsFleeing = false;
+            unit.Movement.Stop();
+            IsFinished = true;
         }
 
         public void Tick(VillageUnit unit)
@@ -56,12 +68,6 @@ namespace _Scripts.Unit.Commands
                 IsFinished = true;
                 unit.Movement.Stop();
             }
-        }
-
-        public void Cancel(VillageUnit unit)
-        {
-            IsFinished = true;
-            unit.Movement.Stop();
         }
 
         private Vector3 GetAverageEnemyPosition()

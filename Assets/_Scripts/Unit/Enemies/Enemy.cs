@@ -16,7 +16,7 @@ namespace _Scripts.Enemies
         Vision _vision;
         UnitMovement _unitMovement;
         IEnemyCommand _currentCommand;
-        ECombatArchetype _combatArchetype = ECombatArchetype.Basic;
+        ECombatArchetype _combatArchetype;
         public UnitStats unitStats = new UnitStats(ECombatArchetype.Basic);
     
         public UnitMovement Movement => _unitMovement;

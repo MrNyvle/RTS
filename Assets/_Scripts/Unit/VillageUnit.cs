@@ -14,22 +14,24 @@ namespace _Scripts.Unit
     [RequireComponent(typeof(Health))]
     public class VillageUnit : MonoBehaviour
     {
+        IUnitCommand _currentCommand;
+        Health _health;
+        TownHall _townHall;
+        UnitMovement _unitMovement;
+        public bool IsAttacking { get; set; }
+        public bool IsFleeing { get; set; }
+
         public UnitResource resource = new ();
         public VillagerUI villagerUI;
         public UnitVillagerJob job;
         public Vision vision;
-
-        public int lumberjackPoint;
-
-        IUnitCommand _currentCommand;
-        Health _health;
-        TownHall _townHall;
-        
-        UnitMovement _unitMovement;
         public UnitStats unitStats ;
-
         public TownHall TownHall => _townHall;
         public UnitMovement Movement => _unitMovement;
+
+        public int lumberjackPoint;
+        [ReadOnly] public String commandName; 
+        [ReadOnly] public String state; 
         
         private void Awake()
         {
@@ -54,6 +56,7 @@ namespace _Scripts.Unit
         public void AssignCombatType(ECombatArchetype combatType)
         {
             unitStats.eCombatType = combatType;
+            unitStats.RecalculateCombatStats();
         }
         
         public void AssignTownHall(TownHall tHall)
@@ -63,21 +66,25 @@ namespace _Scripts.Unit
 
         void Update()
         {
+            commandName = _currentCommand?.GetType().Name;
+            state = _currentCommand?.GetState();
+            
             lumberjackPoint = unitStats.GetJobPoints(EJobType.Lumberjack);
 
             vision.ListVisibleTargets();
             
             if (vision.SeesTarget())
             {
-                if (unitStats.eCombatType == ECombatArchetype.Peasant)
+                if (unitStats.eCombatType == ECombatArchetype.Peasant && !IsFleeing)
                 {
+                    IsFleeing = true;
                     IssueCommand(new Flee(vision));
                 }
-                else
+                else if (!IsAttacking)
                 {
+                    IsAttacking = true;
                     IssueCommand(new AttackComand());
                 }
-                
             }
             
             _currentCommand?.Tick(this);

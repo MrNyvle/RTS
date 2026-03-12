@@ -21,7 +21,12 @@ namespace _Scripts.Unit.Commands
         EResource _resourceToFetch;
         int _quantityToFetch;
         float _timer;
-        
+
+        public string GetState()
+        {
+            return _state.ToString();
+        }
+
         public bool IsFinished { get; set; }
         public EJobType JobType { get; set; }
 

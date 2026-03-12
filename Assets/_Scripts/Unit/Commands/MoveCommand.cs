@@ -12,7 +12,12 @@ namespace _Scripts.Unit.Commands
 
         State _state;
         Vector3 _movePosition;
-        
+
+        public string GetState()
+        {
+            return _state.ToString();
+        }
+
         public bool IsFinished { get; set; }
         public EJobType JobType { get; set; }
 

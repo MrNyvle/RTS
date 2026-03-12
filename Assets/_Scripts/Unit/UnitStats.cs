@@ -7,7 +7,7 @@ namespace _Scripts.Unit
     public class UnitStats
     {
         public Dictionary<EJobType, int> jobsPoint = new Dictionary<EJobType, int>();
-        public Dictionary<ECombatStat, int> combatStats = new Dictionary<ECombatStat, int>();
+        public Dictionary<ECombatStat, float> combatStats = new Dictionary<ECombatStat, float>();
         
         public ECombatArchetype eCombatType;
 
@@ -20,7 +20,7 @@ namespace _Scripts.Unit
         {
             return jobsPoint.GetValueOrDefault(jobType);
         }
-        public int GetCombatStat(ECombatStat combatStat)
+        public float GetCombatStat(ECombatStat combatStat)
         {
             return combatStats.GetValueOrDefault(combatStat);
         }
@@ -37,9 +37,9 @@ namespace _Scripts.Unit
 
         public void RecalculateCombatStats()
         {
-            combatStats[ECombatStat.AttackPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackPoints *  GetJobPoints(EJobType.Warrior)/10;
-            combatStats[ECombatStat.AttackSpeedPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints *  GetJobPoints(EJobType.Warrior)/10;
-            combatStats[ECombatStat.HealthPoints] = GameManager.Instance.GetCombatStats(eCombatType).healthPoints *  GetJobPoints(EJobType.Warrior)/10;
+            combatStats[ECombatStat.AttackPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackPoints *  (GetJobPoints(EJobType.Warrior)+1f)/10f;
+            combatStats[ECombatStat.AttackSpeedPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints /* *  GetJobPoints(EJobType.Warrior)+1/10*/;
+            combatStats[ECombatStat.HealthPoints] = GameManager.Instance.GetCombatStats(eCombatType).healthPoints /* *  (GetJobPoints(EJobType.Warrior)+1f)/10f*/;
             combatStats[ECombatStat.RangePoints] = GameManager.Instance.GetCombatStats(eCombatType).rangePoints /* *  GetJobPoints(EJobType.Warrior)/10 */;
         }
 

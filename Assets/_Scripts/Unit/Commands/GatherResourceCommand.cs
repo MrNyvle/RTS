@@ -20,7 +20,12 @@ namespace _Scripts.Unit.Commands
         GameResource _resource;
         Building _building;
         float _timer;
-    
+
+        public string GetState()
+        {
+            return _state.ToString();
+        }
+
         public bool IsFinished { get; set; }
         public float Timer { get; set; }
         public EJobType JobType { get; set; }

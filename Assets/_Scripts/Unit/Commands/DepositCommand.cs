@@ -17,6 +17,11 @@ namespace _Scripts.Unit.Commands
         private State _state;
         float _timer;
 
+        public string GetState()
+        {
+            return _state.ToString();
+        }
+
         public bool IsFinished { get; set; }
         public EJobType JobType { get; set; }
 
