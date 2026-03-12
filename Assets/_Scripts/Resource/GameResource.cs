@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using _Scripts.Unit;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.VFX;
 
 namespace _Scripts.Resource
 {
@@ -16,7 +18,10 @@ namespace _Scripts.Resource
         public float harvestTime = 2f;
         public bool isValid = true;
         public GameObject pickupPoint;
-
+        public GameObject usedModel;
+        public GameObject currentModel;
+        public VisualEffect visualEffect;
+        
         private void Awake()
         {
             AutoSetupColliders();
@@ -50,6 +55,9 @@ namespace _Scripts.Resource
             unit.AddResource(eResource, amount);
             if (eResourceType == EResourceType.Unique)
             {
+                if (visualEffect is not null) visualEffect.Play();
+                if (currentModel is not null) currentModel.SetActive(false);
+                if (usedModel is not null) usedModel.SetActive(true);
                 isValid = false;
             }
         }

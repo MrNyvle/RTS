@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1d9f779ca272dacb05bd240073ce16, type: 3}
   m_Name: HeavyArmor
   m_EditorClassIdentifier: Assembly-CSharp::_ScriptableObjects.VillageUnit.VillageUnitCombatStats
-  combatType: 2
+  eCombatType: 2
   attackPoints: 2
   attackSpeedPoints: 2
   healthPoints: 8
-  rangePoints: 0
+  rangePoints: 1

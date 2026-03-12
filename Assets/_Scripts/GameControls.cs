@@ -44,6 +44,7 @@ namespace _Scripts
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
+                Debug.Log(hit.collider.tag + " " + hit.collider.name);
                 hit.collider.TryGetComponent(out GameResource resource);
                 hit.collider.TryGetComponent(out ResourceCollider resourceUnlimitedCollider);
                 hit.collider.TryGetComponent(out Building building);

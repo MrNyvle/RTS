@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1d9f779ca272dacb05bd240073ce16, type: 3}
   m_Name: Spadassin
   m_EditorClassIdentifier: Assembly-CSharp::_ScriptableObjects.VillageUnit.VillageUnitCombatStats
-  combatType: 1
+  eCombatType: 1
   attackPoints: 3
   attackSpeedPoints: 8
-  healthPoints: 1
-  rangePoints: 0
+  healthPoints: 5
+  rangePoints: 1

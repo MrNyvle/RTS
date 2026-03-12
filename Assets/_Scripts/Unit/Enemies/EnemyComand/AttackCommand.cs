@@ -30,7 +30,7 @@ namespace _Scripts.Enemies.EnemyComand
         {
             _state = State.MovingToTarget;
             _unitMovement = unit.Movement;
-            _unitMovement.MoveTo(_targetTransform.position);
+            _unitMovement.MoveTo(_targetTransform.position, unit.unitStats.GetCombatStat(ECombatStat.RangePoints));
         }
 
         public void Tick(Enemy unit)
@@ -63,7 +63,7 @@ namespace _Scripts.Enemies.EnemyComand
 
         public bool IsTooFarFromTarget(Enemy unit)
         {
-            return Vector3.Distance(unit.transform.position, _targetTransform.position) > unit.unitStats.GetCombatStat(ECombatStat.RangePoints);
+            return Vector3.Distance(unit.transform.position, _targetTransform.position) >= unit.unitStats.GetCombatStat(ECombatStat.RangePoints);
         }
     }
 }

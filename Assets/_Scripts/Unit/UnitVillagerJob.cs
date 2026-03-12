@@ -12,6 +12,7 @@ namespace _Scripts.Unit
         Dictionary<EJobType, float> _jobsTime = new ();
         
         private float _startJobTime;
+        private bool startedJob;
 
         public UnitVillagerJob(UnitStats stats)
         {
@@ -20,12 +21,20 @@ namespace _Scripts.Unit
         
         public void StartJob(EJobType eJobType)
         {
+            if (startedJob)
+                return;
+            
+            startedJob = true;
             _startJobTime = Time.time;
             _currentJob = eJobType;
         }
 
         public void EndJob()
         {
+            if (!startedJob)
+                return;
+            
+            startedJob = false;
             float taskDuration = Time.time - _startJobTime;
             _jobsTime[_currentJob] = _jobsTime.GetValueOrDefault(_currentJob) + taskDuration;
 

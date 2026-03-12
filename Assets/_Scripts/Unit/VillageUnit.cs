@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace _Scripts.Unit
 {
@@ -16,24 +17,25 @@ namespace _Scripts.Unit
         public UnitResource resource = new ();
         public VillagerUI villagerUI;
         public UnitVillagerJob job;
+        public Vision vision;
 
         public int lumberjackPoint;
 
         IUnitCommand _currentCommand;
         Health _health;
-        Vision _vision;
         TownHall _townHall;
         
         UnitMovement _unitMovement;
-        public UnitStats unitStats = new UnitStats();
+        public UnitStats unitStats ;
 
         public TownHall TownHall => _townHall;
         public UnitMovement Movement => _unitMovement;
         
         private void Awake()
         {
+            unitStats = new UnitStats(ECombatArchetype.Peasant);
             job = new UnitVillagerJob(unitStats);
-            TryGetComponent(out _vision);
+            TryGetComponent(out vision);
             TryGetComponent(out _unitMovement);
             TryGetComponent(out _health);
         }
@@ -63,11 +65,19 @@ namespace _Scripts.Unit
         {
             lumberjackPoint = unitStats.GetJobPoints(EJobType.Lumberjack);
 
-            _vision.ListVisibleTargets();
+            vision.ListVisibleTargets();
             
-            if (_vision.SeesTarget())
+            if (vision.SeesTarget())
             {
-                IssueCommand(new Flee(_vision));
+                if (unitStats.eCombatType == ECombatArchetype.Peasant)
+                {
+                    IssueCommand(new Flee(vision));
+                }
+                else
+                {
+                    IssueCommand(new AttackComand());
+                }
+                
             }
             
             _currentCommand?.Tick(this);

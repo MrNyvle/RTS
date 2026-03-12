@@ -16,8 +16,8 @@ namespace _Scripts.Enemies
         Vision _vision;
         UnitMovement _unitMovement;
         IEnemyCommand _currentCommand;
-        ECombatArchetype _combatArchetype;
-        public UnitStats unitStats = new UnitStats();
+        ECombatArchetype _combatArchetype = ECombatArchetype.Basic;
+        public UnitStats unitStats = new UnitStats(ECombatArchetype.Basic);
     
         public UnitMovement Movement => _unitMovement;
     
@@ -39,15 +39,17 @@ namespace _Scripts.Enemies
             
             if (_vision.SeesTarget())
             {
-                IssueCommand(new AttackCommand(_vision.GetClosestTarget()));
+                IssueCommand(_vision.SeesHostileTarget()
+                    ? new AttackCommand(_vision.GetClosestHostileTarget())
+                    : new AttackCommand(_vision.GetClosestTarget()));
             }
-            
-            _currentCommand?.Tick(this);
             
             if (_currentCommand != null && _currentCommand.IsFinished)
             {
                 IssueCommand(new AttackCommand(townHall.transform));
             }
+            
+            _currentCommand?.Tick(this);
         }
 
         public void IssueCommand(IEnemyCommand command)
@@ -56,7 +58,7 @@ namespace _Scripts.Enemies
             _currentCommand = command;
             _currentCommand.Start(this);
         }
-
+        
         public void StopAllActions()
         {
             _currentCommand?.Cancel(this);

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1d9f779ca272dacb05bd240073ce16, type: 3}
   m_Name: Peasant
   m_EditorClassIdentifier: Assembly-CSharp::_ScriptableObjects.VillageUnit.VillageUnitCombatStats
-  combatType: 3
-  attackPoints: 5
-  attackSpeedPoints: 5
+  eCombatType: 4
+  attackPoints: 0
+  attackSpeedPoints: 0
   healthPoints: 5
-  rangePoints: 0
+  rangePoints: 1

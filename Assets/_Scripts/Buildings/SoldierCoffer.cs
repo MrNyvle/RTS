@@ -35,6 +35,7 @@ namespace _Scripts.Buildings
             VillageUnit prefab = GameManager.Instance.GetArchetypePrefab(eCombatArchetype);
             VillageUnit villageUnit = Instantiate(prefab, GetEntrancePosition(), Quaternion.identity);
             villageUnit.AssignTownHall(townHall);
+            villageUnit.AssignCombatType(eCombatArchetype);
             townHall.villageUnits.Add(villageUnit);
         }
     }

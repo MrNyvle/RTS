@@ -13,8 +13,9 @@ namespace _Scripts.Unit
         }
         
         
-        public void MoveTo(Vector3 pos)
+        public void MoveTo(Vector3 pos, float distance = .5f)
         {
+            _agent.stoppingDistance = distance;
             _agent.SetDestination(pos);
         }
 

@@ -41,6 +41,39 @@ namespace _Scripts.Unit.Commands
             return visibleTargets.Count > 0;
         }
 
+        public bool SeesHostileTarget()
+        {
+            return visibleTargets.Count > 0 && visibleTargets[0].TryGetComponent(out VillageUnit villageUnit) && villageUnit.unitStats.eCombatType != ECombatArchetype.Peasant;
+        }
+        
+        public Transform GetClosestHostileTarget()
+        {
+            if (visibleTargets.Count == 0)
+                return null;
+            
+            Transform target = null;
+            float distance = float.MaxValue;
+            
+            foreach (Transform enemyTransform in visibleTargets)
+            {
+                enemyTransform.TryGetComponent(out VillageUnit villageUnit);
+                if (villageUnit.unitStats.eCombatType == ECombatArchetype.Peasant)
+                {
+                    nextElement: continue;
+                }
+                
+                float dist = Vector3.Distance(enemyTransform.position , transform.position);
+
+                if (dist < distance)
+                {
+                    distance = dist;
+                    target = enemyTransform;
+                }
+            }
+            return target;
+            
+        }
+        
         public Transform GetClosestTarget()
         {
             if (visibleTargets.Count == 0)

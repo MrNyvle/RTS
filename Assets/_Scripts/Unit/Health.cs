@@ -27,6 +27,11 @@ namespace _Scripts.Unit
             
             _maxHealth = stats.GetCombatStat(ECombatStat.HealthPoints);
         }
+
+        public bool IsDead()
+        {
+            return _healthPoints <= 0;
+        }
         
         public void Damage(int amount)
         {

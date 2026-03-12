@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1d9f779ca272dacb05bd240073ce16, type: 3}
   m_Name: Assassin
   m_EditorClassIdentifier: Assembly-CSharp::_ScriptableObjects.VillageUnit.VillageUnitCombatStats
-  combatType: 0
+  eCombatType: 0
   attackPoints: 6
   attackSpeedPoints: 1
   healthPoints: 2
-  rangePoints: 0
+  rangePoints: 1
