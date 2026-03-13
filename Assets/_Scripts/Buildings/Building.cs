@@ -5,6 +5,8 @@ using _Scripts.Unit;
 using UnityEngine;
 using _ScriptableObjects.Building;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using _Scripts.UI;
 
 namespace _Scripts.Buildings
 {
@@ -27,6 +29,9 @@ namespace _Scripts.Buildings
         public BuildingStats stats;
         public float depositTime;
         public bool isBuilt;
+
+        public BuildTimerUI timerUI;
+
 
         private List<ResourcesCost> _currentBuildingResource = new List<ResourcesCost>(){new ResourcesCost(), new ResourcesCost(), new ResourcesCost(), new ResourcesCost()};
         public int currentTier = 0;

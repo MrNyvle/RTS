@@ -26,6 +26,7 @@ namespace _Scripts.Buildings
 
         private IEnumerator MakeMilitaryUnitCoroutine(float time, ECombatArchetype eCombatArchetype)
         {
+            timerUI.ActivateTimer(time);
             yield return new WaitForSeconds(time);
             SpawnMilitaryUnit(eCombatArchetype);
         }
