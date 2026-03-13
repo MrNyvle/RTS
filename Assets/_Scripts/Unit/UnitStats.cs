@@ -37,10 +37,10 @@ namespace _Scripts.Unit
 
         public void RecalculateCombatStats()
         {
-            combatStats[ECombatStat.AttackPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackPoints *  (GetJobPoints(EJobType.Warrior)+1f)/10f;
-            combatStats[ECombatStat.AttackSpeedPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints /* *  GetJobPoints(EJobType.Warrior)+1/10*/;
-            combatStats[ECombatStat.HealthPoints] = GameManager.Instance.GetCombatStats(eCombatType).healthPoints /* *  (GetJobPoints(EJobType.Warrior)+1f)/10f*/;
-            combatStats[ECombatStat.RangePoints] = GameManager.Instance.GetCombatStats(eCombatType).rangePoints /* *  GetJobPoints(EJobType.Warrior)/10 */;
+            combatStats[ECombatStat.AttackPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackPoints +  GameManager.Instance.GetCombatStats(eCombatType).attackPoints * GetJobPoints(EJobType.Warrior)/10f;
+            combatStats[ECombatStat.AttackSpeedPoints] = GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints + GameManager.Instance.GetCombatStats(eCombatType).attackSpeedPoints * GetJobPoints(EJobType.Warrior)/10f;
+            combatStats[ECombatStat.HealthPoints] = GameManager.Instance.GetCombatStats(eCombatType).healthPoints + GameManager.Instance.GetCombatStats(eCombatType).healthPoints * GetJobPoints(EJobType.Warrior)/10f;
+            combatStats[ECombatStat.RangePoints] = GameManager.Instance.GetCombatStats(eCombatType).rangePoints;
         }
 
         public int GetTotalPoints()

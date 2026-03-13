@@ -1100,6 +1100,7 @@ GameObject:
   - component: {fileID: 8447300691527718488}
   - component: {fileID: 8468092620092489275}
   - component: {fileID: 3051301275393870819}
+  - component: {fileID: 7601338434264637910}
   m_Layer: 12
   m_Name: Villager
   m_TagString: VillageUnit
@@ -1236,7 +1237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Unit.VillageUnit
   villagerUI: {fileID: 496148208189934085}
+  vision: {fileID: 0}
   lumberjackPoint: 0
+  commandName: 
+  state: 
 --- !u!114 &8447300691527718488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,9 +1286,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5127e8bc2e3d40bd852b6754b6372bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Unit.Health
+  healthPoints: 5
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7601338434264637910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4077335878607882319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87438dcb30cd4465a723df3f01877697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.Debugers.UnitDEBUGER
 --- !u!1 &4762654495195927233
 GameObject:
   m_ObjectHideFlags: 0

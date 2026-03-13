@@ -6,7 +6,6 @@ using _Scripts.Resource;
 using _Scripts.UI;
 using _Scripts.Unit;
 using _Scripts.Unit.Commands;
-using Unity.VisualScripting.Dependencies.NCalc;
 
 namespace _Scripts
 {
