@@ -83,13 +83,13 @@ namespace _Scripts.Buildings
             {
                 foreach (var kp in building.resource.GetResources())
                 {
-                    villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value;
+                    villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value.GetValue();
                 }
             }
             
             foreach (var kp in resource.GetResources())
             {
-                villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value;
+                villageResources[kp.Key] = villageResources.GetValueOrDefault(kp.Key) +  kp.Value.GetValue();
             }
             
             return villageResources;
@@ -163,14 +163,14 @@ namespace _Scripts.Buildings
                 
                 while (resourceToUse > 0)
                 {
-                    if (resourceToUse < buildings[buildingIndex].resource.GetResources()[res.Item1])
+                    if (resourceToUse < buildings[buildingIndex].resource.GetResources()[res.Item1].GetValue())
                     {
                         buildings[buildingIndex].resource.UseResource(res.Item1, resourceToUse);
                         resourceToUse = 0;
                     }
                     else
                     {
-                        resourceToUse -= buildings[buildingIndex].resource.GetResources()[res.Item1];
+                        resourceToUse -= buildings[buildingIndex].resource.GetResources()[res.Item1].GetValue();
                         buildingIndex++;
                     }
                 }

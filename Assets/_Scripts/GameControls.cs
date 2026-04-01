@@ -107,19 +107,23 @@ namespace _Scripts
                 if (unit != null)
                 {
                     SelectUnit(unit);
-                    return;
+                }
+                else if (GameManager.Instance.SelectedUnit != null)
+                {
+                    DeselectUnit();
                 }
             }
-            DeselectUnit();
         }
 
         void SelectUnit(VillageUnit newUnit)
         {
             GameManager.Instance.SelectedUnit = newUnit;
+            GameManager.Instance.SelectedUnit.SetSelected(true);
         }
 
         void DeselectUnit()
         {
+            GameManager.Instance.SelectedUnit.SetSelected(false);
             GameManager.Instance.SelectedUnit = null;
         }
         

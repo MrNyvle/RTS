@@ -17,7 +17,7 @@ namespace _Scripts.UI
 	    
     	[FormerlySerializedAs("_resourceBars")] public List<ResourceBar> resourceBars;
 	    [FormerlySerializedAs("_eBuildingUI")] public List<BuildingUI>  eBuildingUIs;
-	    
+	    public GameObject cheatScreen;
 
 	    public void UpdateResourceBar(TownHall townHall)
 	    {
@@ -66,6 +66,11 @@ namespace _Scripts.UI
 		    BuildingUI buildingUI = GetBuildingUI(building.EBuildingType);
 		    buildingUI.FillUI(building);
 		    return buildingUI;
+	    }
+
+	    public void ShowCheatScreen()
+	    {
+		    cheatScreen.SetActive(true);
 	    }
     }
 }

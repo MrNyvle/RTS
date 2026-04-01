@@ -18,6 +18,11 @@ namespace _Scripts.Unit
         Health _health;
         TownHall _townHall;
         UnitMovement _unitMovement;
+        
+        private Renderer _renderer;
+        private MaterialPropertyBlock _block;
+        private static readonly int SelectedID = Shader.PropertyToID("_Selected");
+        
         public bool IsAttacking { get; set; }
         public bool IsFleeing { get; set; }
 
@@ -40,6 +45,9 @@ namespace _Scripts.Unit
             TryGetComponent(out vision);
             TryGetComponent(out _unitMovement);
             TryGetComponent(out _health);
+            
+            _renderer = GetComponent<Renderer>();
+            _block = new MaterialPropertyBlock();
         }
         
         private void Start()
@@ -51,6 +59,13 @@ namespace _Scripts.Unit
         public void UpdateUI()
         {
             villagerUI.UpdateUI(resource);
+        }
+        
+        public void SetSelected(bool selected)
+        {
+            _renderer.GetPropertyBlock(_block);
+            _block.SetFloat(SelectedID, selected ? 1f : 0f);
+            _renderer.SetPropertyBlock(_block);
         }
 
         public void AssignCombatType(ECombatArchetype combatType)

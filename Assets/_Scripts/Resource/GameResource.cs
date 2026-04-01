@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using _Scripts.AntiCheat;
 using _Scripts.Unit;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace _Scripts.Resource
         public EResource eResource;
         [Tooltip("Use this for the amount that will be given to the villager")]
         public int amount;
+
+        private long checksum;
+        
         public float harvestTime = 2f;
         public bool isValid = true;
         public GameObject pickupPoint;
@@ -25,6 +29,7 @@ namespace _Scripts.Resource
         private void Awake()
         {
             AutoSetupColliders();
+            UpdateChecksum();
         }
 
         private void AutoSetupColliders()
@@ -51,6 +56,9 @@ namespace _Scripts.Resource
 
         public void FinishTaking(VillageUnit unit)
         {
+            if (checksum != CalculateChecksum())
+                AntiCheatManager.Instance.FlagCheat("Resource checksum tampering detected");
+            
             if (!isValid) return;
             unit.AddResource(eResource, amount);
             if (eResourceType == EResourceType.Unique)
@@ -61,5 +69,16 @@ namespace _Scripts.Resource
                 isValid = false;
             }
         }
+        
+        private int CalculateChecksum()
+        {
+            return Mathf.RoundToInt(amount * 1000) ^ 0xABCDEF;
+        }
+
+        private void UpdateChecksum()
+        {
+            checksum = CalculateChecksum();
+        }
+
     }
 }

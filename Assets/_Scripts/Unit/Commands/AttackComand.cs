@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Unit.Interfaces;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -26,7 +27,7 @@ namespace _Scripts.Unit.Commands
         private Transform target;
         private Health _targetHealth;
         private Vector3 originalPosition;
-        float _timer;
+        private UnitCommandTimer _timer = new UnitCommandTimer();
 
         public AttackComand()
         {
@@ -66,14 +67,14 @@ namespace _Scripts.Unit.Commands
                         break;
                     }
 
-                    if (TickTimer(Time.deltaTime))
+                    if (_timer.TickTimer(Time.deltaTime))
                     {
                         _targetHealth.Damage(unit.unitStats.GetCombatStat(ECombatStat.AttackPoints));
                         Debug.Log("Attacking | Is Target ded : " + _targetHealth.IsDead());
-                        StartTimer(unit.unitStats.GetCombatStat(ECombatStat.AttackSpeedPoints));
+                        _timer.StartTimer(unit.unitStats.GetCombatStat(ECombatStat.AttackSpeedPoints));
                         if (_targetHealth.IsDead())
                         {
-                            CancelTimer();
+                            _timer.CancelTimer();
                             unit.Movement.MoveTo(originalPosition);
                             _state = State.MovingToOrigin;
                         }
@@ -97,27 +98,12 @@ namespace _Scripts.Unit.Commands
             return Vector3.Distance(unit.transform.position, target.position) > unit.unitStats.GetCombatStat(ECombatStat.RangePoints);
         }
 
-        public void StartTimer(float time)
-        {
-            _timer = time;
-        }
-
-        public bool TickTimer(float deltaTime)
-        {
-            _timer -= deltaTime;
-            
-            return _timer <= 0f;
-        }
-        
-        public void CancelTimer()
-        {
-            _timer = 0f;
-        }
+        public float Timer { get; set; }
         
         public void Cancel(VillageUnit unit)
         {
             unit.Movement.Stop();
-            CancelTimer();
+            _timer.CancelTimer();
             unit.IsAttacking = false;
             IsFinished = true;
         }

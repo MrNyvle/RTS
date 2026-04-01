@@ -1,5 +1,6 @@
 using _Scripts.Buildings;
 using _Scripts.Unit;
+using _Scripts.Unit.Interfaces;
 using UnityEngine;
 
 namespace _Scripts.Enemies.EnemyComand
@@ -11,18 +12,19 @@ namespace _Scripts.Enemies.EnemyComand
             MovingToTarget,
             Attacking
         }
-        
+
         State _state;
         Transform _targetTransform;
         Health _targetHealth;
         float _hitDistance;
         UnitMovement _unitMovement;
-        
+        private UnitCommandTimer _timer;
+
         public bool IsFinished { get; set; }
 
         public AttackCommand(Transform transform)
         {
-            _targetTransform =  transform;
+            _targetTransform = transform;
             _targetTransform.TryGetComponent(out _targetHealth);
         }
 
@@ -42,6 +44,7 @@ namespace _Scripts.Enemies.EnemyComand
                     {
                         _state = State.Attacking;
                     }
+
                     break;
                 case State.Attacking:
                     if (IsTooFarFromTarget(unit))
@@ -49,8 +52,9 @@ namespace _Scripts.Enemies.EnemyComand
                         _state = State.MovingToTarget;
                         break;
                     }
+
                     _targetHealth.Damage(unit.unitStats.GetCombatStat(ECombatStat.AttackPoints));
-                    
+
                     break;
             }
         }
@@ -63,7 +67,8 @@ namespace _Scripts.Enemies.EnemyComand
 
         public bool IsTooFarFromTarget(Enemy unit)
         {
-            return Vector3.Distance(unit.transform.position, _targetTransform.position) >= unit.unitStats.GetCombatStat(ECombatStat.RangePoints);
+            return Vector3.Distance(unit.transform.position, _targetTransform.position) >=
+                   unit.unitStats.GetCombatStat(ECombatStat.RangePoints);
         }
     }
 }

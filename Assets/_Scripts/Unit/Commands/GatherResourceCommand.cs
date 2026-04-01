@@ -29,6 +29,8 @@ namespace _Scripts.Unit.Commands
         public bool IsFinished { get; set; }
         public float Timer { get; set; }
         public EJobType JobType { get; set; }
+        
+        public bool IsRepeatable => _resource.eResourceType == EResourceType.Unlimited;
 
         public GatherResourceCommand(GameResource resource)
         {
@@ -126,11 +128,8 @@ namespace _Scripts.Unit.Commands
 
         public void Repeat(VillageUnit unit)
         {
-            if (_resource.eResourceType == EResourceType.Unlimited)
-            {
-                IsFinished = false;
-                Start(unit);
-            }
+            IsFinished = false;
+            Start(unit);
         }
     }
 }
