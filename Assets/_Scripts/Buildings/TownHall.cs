@@ -128,7 +128,7 @@ namespace _Scripts.Buildings
             {
                 float dist = Vector3.Distance(building.GetEntrancePosition(), res.GetPosition());
 
-                if (dist < distance)
+                if (dist < distance && building.isBuilt)
                 {
                     distance = dist;
                     closest = building;
