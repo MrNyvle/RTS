@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _ScriptableObjects.VillageUnit;
 using _ScriptableObjects.VillageUnit.JobScaling;
@@ -20,6 +21,9 @@ namespace _Scripts
         public List<ArchetypePrefab> archetypePrefabs;
         public JobScalingBalancer  jobScalingBalancers;
         public List<TownHall> townHalls;
+        public TimeSpan GameTime;
+        
+        private DateTime start;
         
         public readonly Dictionary<EResource, EJobType> resourceToJob =  new Dictionary<EResource, EJobType>()
         {
@@ -77,6 +81,37 @@ namespace _Scripts
         public void RebuildNavmesh()
         {
             navMesh.BuildNavMesh();
+        }
+
+        private void Start()
+        {
+            start = DateTime.Now;
+        }
+
+        public string GetGameTimeString()
+        {
+            TimeSpan currentGameTime = GameTime + (DateTime.Now - start); 
+            
+            return currentGameTime.ToString(@"hh\:mm\:ss");
+        }
+
+        public TimeSpan GetGameTime()
+        {
+            return GameTime + (DateTime.Now - start);
+        }
+        
+        private void Destroy()
+        {
+            DateTime end = DateTime.Now;
+
+            if (GameTime.TotalSeconds <= 0)
+            {
+                GameTime = end - start;
+            }
+            else
+            {
+                GameTime += end - start;
+            }
         }
 
         public VillageUnitCombatStats GetCombatStats(ECombatArchetype eCombatType)

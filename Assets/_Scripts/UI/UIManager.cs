@@ -14,6 +14,7 @@ namespace _Scripts.UI
     {
 	    public IconsUI iconsUI;
 	    public BuildingUI activeBuildingUI;
+	    public TimerUI timerUI;
 	    
     	[FormerlySerializedAs("_resourceBars")] public List<ResourceBar> resourceBars;
 	    [FormerlySerializedAs("_eBuildingUI")] public List<BuildingUI>  eBuildingUIs;
@@ -71,6 +72,16 @@ namespace _Scripts.UI
 	    public void ShowCheatScreen()
 	    {
 		    cheatScreen.SetActive(true);
+	    }
+
+	    private void Update()
+	    {
+		    UpdateGameTimer();
+	    }
+
+	    private void UpdateGameTimer()
+	    {
+		    timerUI.SetTime(GameManager.Instance.GetGameTimeString());
 	    }
     }
 }
