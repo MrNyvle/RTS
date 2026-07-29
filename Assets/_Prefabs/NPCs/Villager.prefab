@@ -1290,6 +1290,7 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  healthSlider: {fileID: 8136187524940540266}
 --- !u!114 &7601338434264637910
 MonoBehaviour:
   m_ObjectHideFlags: 0

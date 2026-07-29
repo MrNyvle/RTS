@@ -103,15 +103,11 @@ namespace _Scripts
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 VillageUnit unit = hit.collider.GetComponent<VillageUnit>();
-
+                
+                DeselectUnit();
+                
                 if (unit != null)
-                {
                     SelectUnit(unit);
-                }
-                else if (GameManager.Instance.SelectedUnit != null)
-                {
-                    DeselectUnit();
-                }
             }
         }
 
@@ -123,6 +119,9 @@ namespace _Scripts
 
         void DeselectUnit()
         {
+            if (GameManager.Instance.SelectedUnit == null)
+                return;
+            
             GameManager.Instance.SelectedUnit.SetSelected(false);
             GameManager.Instance.SelectedUnit = null;
         }

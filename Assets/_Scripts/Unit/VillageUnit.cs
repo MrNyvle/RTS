@@ -53,12 +53,16 @@ namespace _Scripts.Unit
         private void Start()
         {
             UpdateUI();
+
+            _health.onDeath.AddListener(() => _townHall.OnVillageUnitDeath(this)); 
+
         }
 
         [Button]
         public void UpdateUI()
         {
-            villagerUI.UpdateUI(resource);
+            if (villagerUI != null)
+                villagerUI.UpdateUI(resource);
         }
         
         public void SetSelected(bool selected)
@@ -97,8 +101,7 @@ namespace _Scripts.Unit
                 }
                 else if (!IsAttacking)
                 {
-                    IsAttacking = true;
-                    IssueCommand(new AttackComand());
+                    IssueCommand(new AttackCommand());
                 }
             }
             
@@ -119,6 +122,7 @@ namespace _Scripts.Unit
 
         public void IssueCommand(IUnitCommand command)
         {
+            IsAttacking = command.GetType() == typeof(AttackCommand);
             _currentCommand?.Cancel(this);
             _currentCommand = command;
             _currentCommand.Start(this);

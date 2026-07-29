@@ -17,8 +17,8 @@ namespace _Scripts.Enemies.EnemyComand
         Transform _targetTransform;
         Health _targetHealth;
         float _hitDistance;
-        UnitMovement _unitMovement;
         private UnitCommandTimer _timer;
+        private Vector3 destination;
 
         public bool IsFinished { get; set; }
 
@@ -31,8 +31,6 @@ namespace _Scripts.Enemies.EnemyComand
         public void Start(Enemy unit)
         {
             _state = State.MovingToTarget;
-            _unitMovement = unit.Movement;
-            _unitMovement.MoveTo(_targetTransform.position, unit.unitStats.GetCombatStat(ECombatStat.RangePoints));
         }
 
         public void Tick(Enemy unit)
@@ -40,8 +38,16 @@ namespace _Scripts.Enemies.EnemyComand
             switch (_state)
             {
                 case State.MovingToTarget:
-                    if (_unitMovement.Reached())
+                    Debug.Log("Moving to target");
+                    if (destination != _targetTransform.position)
                     {
+                        unit.Movement.MoveTo(_targetTransform.position, unit.unitStats.GetCombatStat(ECombatStat.RangePoints));
+                        destination = _targetTransform.position;
+                    }
+                    
+                    if (unit.Movement.Reached())
+                    {
+                        unit.Movement.Stop();
                         _state = State.Attacking;
                     }
 
@@ -61,7 +67,7 @@ namespace _Scripts.Enemies.EnemyComand
 
         public void Cancel(Enemy unit)
         {
-            _unitMovement.Stop();
+            unit.Movement.Stop();
             IsFinished = true;
         }
 

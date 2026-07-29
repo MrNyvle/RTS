@@ -5,7 +5,7 @@ using UnityEngine.Video;
 
 namespace _Scripts.Unit.Commands
 {
-    public class AttackComand : IUnitCommand
+    public class AttackCommand : IUnitCommand
     {
         enum State
         {
@@ -29,7 +29,7 @@ namespace _Scripts.Unit.Commands
         private Vector3 originalPosition;
         private UnitCommandTimer _timer = new UnitCommandTimer();
 
-        public AttackComand()
+        public AttackCommand()
         {
             JobType = EJobType.Warrior;
         }
@@ -41,6 +41,9 @@ namespace _Scripts.Unit.Commands
 
         public void Tick(VillageUnit unit)
         {
+            if (_targetHealth is not null && _targetHealth.IsDead())
+                _state = State.MovingToOrigin;
+            
             switch (_state)
             {
                 case State.Guarding:
@@ -70,22 +73,28 @@ namespace _Scripts.Unit.Commands
                     if (_timer.TickTimer(Time.deltaTime))
                     {
                         _targetHealth.Damage(unit.unitStats.GetCombatStat(ECombatStat.AttackPoints));
-                        Debug.Log("Attacking | Is Target ded : " + _targetHealth.IsDead());
+                        Debug.Log("Attacking | Is Target dead : " + _targetHealth.IsDead());
                         _timer.StartTimer(unit.unitStats.GetCombatStat(ECombatStat.AttackSpeedPoints));
                         if (_targetHealth.IsDead())
                         {
                             _timer.CancelTimer();
-                            unit.Movement.MoveTo(originalPosition);
                             _state = State.MovingToOrigin;
                         }
                     }
                     break;
                 
                 case State.MovingToOrigin:
-                    if (unit.Movement.Reached())
+                    if (unit.vision.SeesTarget())
                     {
-                        unit.job.EndJob();
+                        target = unit.vision.GetClosestTarget();
+                        target.TryGetComponent(out _targetHealth);
+                        _state = State.MovingInRange;
                     }
+                    
+                    unit.Movement.MoveTo(originalPosition);
+                    
+                    if (unit.Movement.Reached())
+                        unit.job.EndJob();
                     break;
                 
                 default:

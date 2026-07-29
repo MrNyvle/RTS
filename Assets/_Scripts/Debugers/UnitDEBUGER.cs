@@ -36,6 +36,7 @@ namespace _Scripts.Debugers
                    $"HP : {health.healthPoints}\n" +
                    $"Is Dead : {health.IsDead()}\n" +
                    "----------Combat Stats-----------\n" +
+                   $"Combat Archetype : {stats.eCombatType.ToString()}\n" +
                    $"Attack Points: {stats.GetCombatStat(ECombatStat.AttackPoints)}\n" +
                    $"Attack Speed: {stats.GetCombatStat(ECombatStat.AttackSpeedPoints)}\n" +
                    $"DPS: {stats.GetCombatStat(ECombatStat.AttackPoints) * stats.GetCombatStat(ECombatStat.AttackSpeedPoints)}\n" +

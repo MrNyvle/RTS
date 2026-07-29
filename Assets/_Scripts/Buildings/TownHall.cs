@@ -57,6 +57,12 @@ namespace _Scripts.Buildings
             UpdateUI();
         }
 
+        public void OnVillageUnitDeath(VillageUnit villageUnit)
+        {
+            villageUnits.Remove(villageUnit);
+            Destroy(villageUnit.gameObject);
+        }
+
         public float AvgTownCombatLevel()
         {
             float sum = 0;
