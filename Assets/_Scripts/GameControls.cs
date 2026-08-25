@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Scripts.Buildings;
 using UnityEngine.InputSystem;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace _Scripts
     public class GameControls : Singleton<GameControls>
     {
         public InputSystem_Actions actions;
+
+        private Vector2 clickPos;
+        private List<Transform> selectedUnits = new List<Transform>();
         
         private void OnEnable()
         {
@@ -21,22 +25,63 @@ namespace _Scripts
 
         private void Start()
         {
+            actions.RTS.LeftClick.canceled += OnClickLeftCanceled;
             actions.RTS.LeftClick.performed += OnClickLeft;
             actions.RTS.RightClick.performed += OnClickRight;
         }
 
         private void OnClickRight(InputAction.CallbackContext obj)
         {
+            if (selectedUnits.Count > 0)
+            {
+                
+            }
+            
             TryAssignTask();
             DeselectBuilding();
         }
 
-        private void OnClickLeft(InputAction.CallbackContext obj)
+        private void OnClickLeftCanceled(InputAction.CallbackContext obj)
         {
+
+            if ((actions.RTS.MousePosition.ReadValue<Vector2>() - clickPos).magnitude >= (Vector2.one * 0.2f).magnitude)
+            {
+                Ray ray = GameManager.Instance.mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                Physics.Raycast(ray, out RaycastHit hit);
+                var CoordOne = hit.point;
+                
+                ray = GameManager.Instance.mainCamera.ScreenPointToRay(clickPos);
+                Physics.Raycast(ray, out hit);
+                var CoordTwo = hit.point;
+
+                foreach (var unit in GameManager.Instance.townHalls[0].villageUnits)
+                {
+                    if (IsInSelection(unit.transform.position, CoordOne, CoordTwo))
+                    {
+                        selectedUnits.Add(unit.transform);
+                    }
+                }
+                
+                return;
+            }
+            
             TrySelectUnit();
             TrySelectBuilding();
+            
+            
         }
 
+        public bool IsInSelection(Vector3 position, Vector3 cornerOne, Vector3 cornerTwo)
+        {
+            return position.x >= cornerOne.x && position.x <= cornerTwo.x && position.z >= cornerOne.z &&
+                position.z <= cornerTwo.z;
+        }
+
+        private void OnClickLeft(InputAction.CallbackContext obj)
+        {
+            clickPos = actions.RTS.MousePosition.ReadValue<Vector2>();
+        }
+        
         private void TryAssignTask()
         {
             Ray ray = GameManager.Instance.mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
